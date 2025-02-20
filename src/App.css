@@ -678,6 +678,12 @@ h2:after {
   text-align: center;
 }
 
+.social-link {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 .social-links {
   gap: 1.5rem;
   margin-bottom: 1.5rem;

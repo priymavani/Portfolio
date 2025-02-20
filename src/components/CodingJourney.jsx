@@ -71,6 +71,7 @@ const CodingJourney = () => {
     }
   ];
   
+  
   return (
     <section className="coding-journey section">
       <h2>My Coding Journey</h2>

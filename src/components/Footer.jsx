@@ -9,7 +9,7 @@ const Footer = () => {
   
   return (
     <footer className="footer">
-      <div className="social-links">
+      <div className="social-link">
         {socialLinks.map(link => (
           <a 
             key={link.id} 
