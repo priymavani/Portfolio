@@ -41,10 +41,10 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        "your_service_id",    // Replace with your EmailJS Service ID
-        "your_template_id",   // Replace with your EmailJS Template ID
+        "service_95ulhwq",    // Replace with your EmailJS Service ID
+        "template_1s2w0yi",   // Replace with your EmailJS Template ID
         templateParams,
-        "your_public_key"     // Replace with your EmailJS Public Key
+        "nhKT0pj_XHjn32KlL"     // Replace with your EmailJS Public Key
       );
       setStatus("✅ Message sent successfully!");
       setFormData({ name: "", email: "", subject: "", message: "" });
