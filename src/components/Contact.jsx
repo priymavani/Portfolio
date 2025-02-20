@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import emailjs from "emailjs-com";
+import * as emailjs from "emailjs-com";
+
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Contact = () => {
