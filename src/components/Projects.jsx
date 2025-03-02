@@ -1,6 +1,31 @@
 import React from 'react';
+import  { useEffect, useRef } from "react";
 
 const Projects = () => {
+
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.youtube.com/watch?v=KXHnwewU73w";
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      window.onYouTubeIframeAPIReady = () => {
+        new window.YT.Player(iframeRef.current, {
+          events: {
+            onReady: (event) => event.target.playVideo(),
+          },
+        });
+      };
+    };
+
+    return () => {
+      delete window.onYouTubeIframeAPIReady;
+    };
+  }, []);
+
+
   const projects = [
     {
       id: 1,
@@ -84,7 +109,28 @@ const Projects = () => {
   return (
     <section className="projects section">
       <h2>My Projects</h2>
-      <div className="projects-grid">
+
+
+    <h3 style={{marginTop:"30px"}}>Task Bridge MERN Stack DEMO - 1  </h3>
+    <h4>Current Poject </h4>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh",margin:"20px"}}>
+      <iframe
+        ref={iframeRef}
+        id="youtube-player"
+        width="80%"
+        height="450"
+        src="https://www.youtube.com/embed/KXHnwewU73w?&controls=1&loop=1&playlist=KXHnwewU73w&enablejsapi=1"
+        
+        title="Task Bridge"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
+  
+  <hr />
+      
+      <div className="projects-grid" style={{marginTop:"30px"}}>
         {projects.map(project => (
           <div key={project.id} className="project-card">
             <div className="project-image">
@@ -115,3 +161,5 @@ const Projects = () => {
 };
 
 export default Projects;
+
+
