@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 4%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 100%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --primary: 198 100% 48%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 180 100% 39%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 25 100% 53%;
+  --accent-foreground: 0 0% 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-white bg-background-dark min-h-screen;
+  color-scheme: dark;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Smooth scrolling */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-600;
+}
+
+/* Text gradient */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-secondary-400 to-accent-400 animate-gradient bg-[length:200%_auto];
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 20px 2px rgba(14, 165, 233, 0.15);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px 2px rgba(249, 115, 22, 0.15);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 20px 2px rgba(20, 184, 166, 0.15);
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+/* Animations */
+@layer utilities {
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-3000 {
+    animation-delay: 3s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
