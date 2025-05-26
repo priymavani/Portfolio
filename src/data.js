@@ -187,7 +187,6 @@ export const certificates = [
     id: 1,
     title: "CSS (basics)",
     issuer: "HackerRank",
-    // date: "2023",
     credentialId: "C746D9A04A12",
     image: "https://res.cloudinary.com/dd6lqkak0/image/upload/v1748112005/css_certificate_page-0001_b7mcml.jpg",
     credentialUrl: "https://www.hackerrank.com/certificates/c746d9a04a12"
@@ -196,7 +195,6 @@ export const certificates = [
     id: 2,
     title: "GitHub Copilot Fundamentals",
     issuer: "Simplilearn | SkillUp",
-    // date: "2023",
     credentialId: "8375577",
     image: "https://res.cloudinary.com/dd6lqkak0/image/upload/v1748112541/github_copilot_skillup_page-0001_1_izrdje.jpg",
     credentialUrl: "https://masaischool.com/certificates/456"
@@ -217,7 +215,30 @@ export const certificates = [
     image:'https://res.cloudinary.com/dd6lqkak0/image/upload/v1740051857/team_%22team%40123%22/ocvk8wn6ddvumh8qndfy.png',
     credentialUrl : 'https://www.sololearn.com/certificates/CC-JWTVNWRM'
   },
-  
+    {
+    id: 5,
+    title: "JavaScript (Basic)",
+    issuer: "HackerRank",
+    credentialId: "110BC7FIF95",
+    image: "https://res.cloudinary.com/dd6lqkak0/image/upload/v1748243629/javascript_basic_certificate_page-0001_ln67h9.jpg",
+    credentialUrl: "https://www.hackerrank.com/certificates/1110bc7f1f95"
+  },
+  {
+    id: 6,
+    title: "JavaScript (Intermediate)",
+    issuer: "HackerRank",
+    credentialId: "428AC677BED2",
+    image: "https://res.cloudinary.com/dd6lqkak0/image/upload/v1748246474/javascript_intermediate_certificate_1__page-0001_r9jowv.jpg",
+    credentialUrl: "https://www.hackerrank.com/certificates/428ac677bed2"
+  },
+  {
+    id: 7,
+    title: "Node (Basic)",
+    issuer: "HackerRank",
+    credentialId: "6DCC004C557B",
+    image: "https://res.cloudinary.com/dd6lqkak0/image/upload/v1748243628/nodejs_basic_certificate_page-0001_fiwe6m.jpg",
+    credentialUrl: "https://www.hackerrank.com/certificates/6dcc004c557b"
+  },
 ];
 
 export const hackathons = [
