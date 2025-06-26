@@ -3,6 +3,15 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { skills, experiences,  } from '../data';
 import SectionHeading from './ui/SectionHeading';
+import Squares from './ui/Squares';
+
+<Squares 
+speed={0.5} 
+squareSize={40}
+direction='diagonal' // up, down, left, right, diagonal
+borderColor='#7ACEF5'
+hoverFillColor='#272626'
+/>
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -16,17 +25,19 @@ const About = () => {
   };
 
   return (
-    <section id="about" ref={ref} className="py-20 md:py-32 bg-background-light relative">
-      <div className="absolute inset-0 overflow-hidden">
+    <section id="about" ref={ref} className="py-20 md:py-32 bg-background-light relative overflow-hidden">
+      {/* Squares background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Squares />
+      </div>
+      {/* Background blur effects */}
+      <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl opacity-50"></div>
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent-500/5 rounded-full filter blur-3xl opacity-50"></div>
       </div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        
-
+      <div className="container mx-auto px-6 relative z-20">
         <SectionHeading title="About Me" subtitle="My background and skills" />
-        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-16">
           <motion.div
             initial="hidden"
@@ -41,29 +52,8 @@ const About = () => {
             <p className="text-neutral-300 mb-8">
               I specialize in creating responsive, user-friendly web applications that solve real-world problems. My approach combines technical expertise with a keen eye for design, ensuring that every project I work on is both functional and visually appealing. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.
             </p>
-            
-            {/* <h3 className="text-2xl font-bold mb-6">Experience</h3>
-            <div className="space-y-8">
-              {experiences.map((exp, index) => (
-                <motion.div 
-                  key={exp.id}
-                  className="border-l-2 border-primary-600 pl-6 relative"
-                  initial="hidden"
-                  animate={inView ? "visible" : "hidden"}
-                  variants={fadeIn}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                >
-                  <div className="absolute w-3 h-3 bg-primary-600 rounded-full -left-[7px] top-2"></div>
-                  <h4 className="text-xl font-bold">{exp.role}</h4>
-                  <div className="flex justify-between items-center mb-2">
-                    <p className="text-primary-400">{exp.company}</p>
-                    <p className="text-neutral-400 text-sm">{exp.period}</p>
-                  </div>
-                  <p className="text-neutral-300">{exp.description}</p>
-                </motion.div>
-              ))}
-            </div> */}
-             <motion.div
+            {/* ...existing code... */}
+            <motion.div
               className="mt-12 p-6 glass rounded-xl"
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
@@ -95,7 +85,6 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <h3 className="text-2xl font-bold mb-6">Skills & Expertise</h3>
-            
             <div className="space-y-10">
               {skills.map((skillGroup, groupIndex) => (
                 <motion.div 
@@ -122,8 +111,6 @@ const About = () => {
                 </motion.div>
               ))}
             </div>
-            
-           
           </motion.div>
         </div>
       </div>
