@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaTwitter, FaChevronDown } from 'react-icons/fa';
 import { socialLinks } from '../data';
 import Button from './ui/Button';
+import Hyperspeed from './ui/Hyperspeed'; 
 
 const Hero = () => {
   const handleScrollDown = () => {
@@ -11,14 +12,18 @@ const Hero = () => {
 
   return (
     <section id="hero" className="min-h-screen flex items-center relative overflow-hidden py-20">
+      {/* Hyperspeed 3D background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Hyperspeed />
+      </div>
       {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-secondary-500/10 rounded-full filter blur-3xl"></div>
         <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-accent-500/10 rounded-full filter blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-20">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-16">
           <motion.div 
             className="lg:w-3/5"
@@ -90,16 +95,18 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <div className="relative w-full aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-secondary-500/20 to-accent-500/20 rounded-full animate-spin-slow"></div>
-              <div className="absolute inset-8 bg-background-dark rounded-full overflow-hidden flex items-center justify-center">
-                <img 
-                  src="https://res.cloudinary.com/dd6lqkak0/image/upload/v1748110540/priy_mavani_p_jranbw.jpg" 
-                  alt="Cole" 
-                  className="w-full h-full object-cover rounded-full"
-                />
-              </div>
-            </div>
+           <div className="relative w-[96%] aspect-square max-w-md mx-auto">
+  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-secondary-500/20 to-accent-500/20 rounded-[100px] animate-spin-slow"></div>
+  
+  <div className="absolute inset-8 bg-background-dark rounded-[100px] overflow-hidden flex items-center justify-center">
+    <img 
+      src="https://res.cloudinary.com/dd6lqkak0/image/upload/v1748110540/priy_mavani_p_jranbw.jpg" 
+      alt="Cole" 
+      className="w-[96%] h-[96%] object-cover rounded-[100px]"
+    />
+  </div>
+</div>
+
           </motion.div>
         </div>
         
