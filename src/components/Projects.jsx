@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { projects } from '../data';
 import SectionHeading from './ui/SectionHeading';
+import DotGrid from './ui/DotGrid'
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -30,13 +31,17 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" ref={ref} className="py-20 md:py-32 relative">
-      <div className="absolute inset-0 overflow-hidden">
+    <section id="projects" ref={ref} className="py-20 md:py-32 relative overflow-hidden">
+      {/* DotGrid background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <DotGrid />
+      </div>
+      <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
         <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-primary-500/5 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500/5 rounded-full filter blur-3xl"></div>
       </div>
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-20">
         <SectionHeading title="My Projects" subtitle="Recent work I've done" />
         
         {/* Filter buttons */}
