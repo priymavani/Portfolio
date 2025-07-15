@@ -9,7 +9,6 @@ import Cursor from './components/ui/Cursor';
 import Achievements from './components/Achievements';
 import Resume from './components/Resume';
 import { motion } from 'framer-motion';
-import {hello} from 'hello.jsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,7 +46,6 @@ function App() {
       <Cursor />
       <Header />
       <main>
-        <Hello/>
         <Hero />
         <About />
         <Projects />
