@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionHeading from './ui/SectionHeading';
-import Threads from './ui/Threads'
+import Pattern from './ui/Pattern';
 
 const Resume = () => {
   const [ref, inView] = useInView({
@@ -19,7 +19,7 @@ const Resume = () => {
     <section id="resume" ref={ref} className="py-20 md:py-32 bg-background-light relative">
      <div className="absolute inset-0 z-0 pointer-events-none">
 
-      <Threads/>
+      <Pattern/>
      </div>
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-500/5 rounded-full filter blur-3xl"></div>
