@@ -30,7 +30,11 @@ const Header = ({ scrollY }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background-dark/80 backdrop-blur-md py-4 shadow-md' : 'bg-transparent py-6'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+      
+       bg-black bg-opacity-90 backdrop-blur-md py-4 shadow-md
+       
+    `}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <motion.a 
           href="#hero"
