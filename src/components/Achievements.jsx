@@ -52,7 +52,7 @@ const Achievements = () => {
 
         {/* Certificates Slider */}
         <div className="mt-16">
-          <h3 className="text-2xl font-bold mb-8">Certificates</h3>
+          <h3 className="text-4xl font-extrabold mb-8 text-center">Certificates</h3>
           <div className="relative max-w-4xl mx-auto">
             <div className="overflow-hidden">
               <motion.div
@@ -107,7 +107,7 @@ const Achievements = () => {
 
         {/* Certificate Cards Grid */}
         <div className="mt-20">
-          <h3 className="text-2xl font-bold mb-8">All Certificates</h3>
+          <h3 className="text-4xl font-extrabold mb-8 text-center">All Certificates</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certificates.map((cert) => (
               <motion.div
@@ -150,7 +150,7 @@ const Achievements = () => {
 
         {/* Hackathon Cards */}
         <div className="mt-20">
-          <h3 className="text-2xl font-bold mb-8">Hackathon Achievements</h3>
+          <h3 className="text-4xl font-extrabold mb-8 text-center">Hackathon Achievements</h3>
           <div className="grid grid-cols-1 gap-8">
             {hackathons.map((hackathon) => (
               <motion.div
