@@ -6,6 +6,7 @@ import { socialLinks } from '../data';
 import SectionHeading from './ui/SectionHeading';
 import Button from './ui/Button';
 import emailjs from "@emailjs/browser";
+import Dotanimation from './ui/Dotanimation';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -66,6 +67,13 @@ const Contact = () => {
 
   return (
     <section id="contact" ref={ref} className="py-20 md:py-32 bg-background-light relative">
+
+       <div className="absolute inset-0 z-0 pointer-events-none">
+        <Dotanimation />
+        
+      </div>
+
+
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary-500/5 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent-500/5 rounded-full filter blur-3xl"></div>
@@ -173,7 +181,7 @@ const Contact = () => {
                   required
                   disabled={isLoading}
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-transparent text-white placeholder-neutral-500 transition-all"
-                  placeholder="John Doe"
+                  placeholder="Enter your name"
                 />
               </motion.div>
               
@@ -195,7 +203,7 @@ const Contact = () => {
                   required
                   disabled={isLoading}
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-transparent text-white placeholder-neutral-500 transition-all"
-                  placeholder="john@example.com"
+                  placeholder="name@example.com"
                 />
               </motion.div>
               
