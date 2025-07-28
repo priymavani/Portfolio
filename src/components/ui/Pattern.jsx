@@ -14,15 +14,16 @@ const StyledWrapper = styled.div`
   inset: 0;
   width: 100%;
   height: 100%;
+  min-height: 100%;
   pointer-events: none;
   z-index: 0;
 
   .container {
     width: 100%;
     height: 100%;
-    --s: 37px; /* control the size */
-
-    --c: #0000,rgb(14, 14, 14) 0.5deg 119.5deg, #0000 120deg;
+    min-height: 100%;
+    --s: 37px;
+    --c: #0000, rgb(14, 14, 14) 0.5deg 119.5deg, #0000 120deg;
     --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
     --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
     --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
