@@ -12,14 +12,18 @@ const Dotanimation = () => {
 const StyledWrapper = styled.div`
   position: absolute;
   inset: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
   pointer-events: none;
   z-index: 0;
 
   .container {
-    width: 100%;
+    width: 100vw;
     height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
     background: lightblue;
     position: relative;
     overflow: hidden;
