@@ -21,7 +21,8 @@ I am *Priy Mavani*, a passionate *Full Stack Developer* with a strong interest i
 
 ## Portfolio Link
 
- my portfolio live at [https://priymavani-portfolio.netlify.app/](https://priymavani-portfolio.netlify.app/).
+ my portfolio live at [https://priymavani
+i.me/](https://priymavani.me/).
 
 ## 📬 Contact  
 
