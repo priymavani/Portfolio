@@ -65,7 +65,6 @@ const certificateSchema = new mongoose.Schema({
 // Index for faster queries
 certificateSchema.index({ order: 1 });
 certificateSchema.index({ issuer: 1 });
-certificateSchema.index({ credentialId: 1 });
 
 const Certificate = mongoose.models.Certificate || mongoose.model('Certificate', certificateSchema);
 
