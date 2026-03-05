@@ -1,32 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import HackathonCard from './HackathonCard';
 import HackathonModal from './HackathonModal';
+import { usePortfolio } from '../contexts/PortfolioContext';
 
 const Hackathons = () => {
-    const [hackathons, setHackathons] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { hackathons, loading } = usePortfolio();
     const [selectedHackathon, setSelectedHackathon] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    useEffect(() => {
-        const fetchHackathons = async () => {
-            try {
-                const res = await fetch('/api/hackathons');
-                const data = await res.json();
-                if (data.success) {
-                    setHackathons(data.data);
-                }
-            } catch (error) {
-                console.error('Failed to fetch hackathons:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchHackathons();
-    }, []);
 
     const openModal = (hackathon) => {
         setSelectedHackathon(hackathon);
