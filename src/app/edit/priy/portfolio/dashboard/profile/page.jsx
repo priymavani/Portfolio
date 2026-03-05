@@ -189,7 +189,24 @@ export default function ProfilePage() {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <FormInput label="Platform" name={`platform-${index}`} value={link.platform} onChange={(e) => handleSocialLinkChange(index, 'platform', e.target.value)} placeholder="e.g., github" />
+                                    <FormSelect
+                                        label="Platform"
+                                        name={`platform-${index}`}
+                                        value={link.platform}
+                                        onChange={(e) => handleSocialLinkChange(index, 'platform', e.target.value)}
+                                        options={[
+                                            { value: 'github', label: 'GitHub' },
+                                            { value: 'linkedin', label: 'LinkedIn' },
+                                            { value: 'youtube', label: 'YouTube' },
+                                            { value: 'twitter', label: 'Twitter' },
+                                            { value: 'x', label: 'X' },
+                                            { value: 'instagram', label: 'Instagram' },
+                                            { value: 'facebook', label: 'Facebook' },
+                                            { value: 'portfolio', label: 'Portfolio' },
+                                            { value: 'email', label: 'Email' },
+                                            { value: 'other', label: 'Other' },
+                                        ]}
+                                    />
                                     <FormInput label="URL" name={`url-${index}`} value={link.url} onChange={(e) => handleSocialLinkChange(index, 'url', e.target.value)} placeholder="https://..." />
                                     <FormInput label="Username" name={`username-${index}`} value={link.username} onChange={(e) => handleSocialLinkChange(index, 'username', e.target.value)} placeholder="@username" />
                                     <FormInput label="Icon" name={`icon-${index}`} value={link.icon} onChange={(e) => handleSocialLinkChange(index, 'icon', e.target.value)} placeholder="SiGithub" />
