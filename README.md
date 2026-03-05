@@ -60,5 +60,5 @@ src/
 ## 🔗 Connect
 
 - **GitHub** — [github.com/priymavani](https://github.com/priymavani)
-- **LinkedIn** — [linkedin.com/in/priymavani](https://linkedin.com/in/priymavani)
-- **Email** — priymavani02@gmail.com
+- **LinkedIn** — [linkedin.com/in/priy-mavani](https://www.linkedin.com/in/priy-mavani/)
+- **Email** — priy.mavani.cg@gmail.com
