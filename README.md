@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Priy Mavani — Portfolio
 
-## Getting Started
+🌐 **[priymavani.in](https://www.priymavani.in)**
 
-First, run the development server:
+A modern, dark-themed developer portfolio built with **Next.js 14**, **Tailwind CSS**, and **Framer Motion**. Designed with a sleek, minimal aesthetic featuring glassmorphism panels, smooth scroll-driven animations, and a fully responsive layout from mobile to desktop.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## ✨ Features
+
+- **Hero Section** — Cinematic intro with parallax scrolling, profile reveal, and an "Open to Work" status badge
+- **Live GitHub & LeetCode Stats** — Real-time contribution graph and problem-solving metrics fetched via API
+- **Projects Showcase** — Interactive project cards with live demo links, GitHub repos, Figma designs, and Postman docs
+- **Skills Grid** — Categorized tech stack display (Frontend, Backend, Tools, and Other Skills) with animated icons
+- **Hackathon Highlights** — Dedicated section with team details, demo links, and project breakdowns
+- **Achievements & Certificates** — Verified certifications displayed with credential links
+- **Contact Form** — Functional email contact powered by EmailJS
+- **Admin Panel** — Protected dashboard to manage portfolio content dynamically via MongoDB
+- **SEO Optimized** — Full Open Graph, Twitter Cards, JSON-LD structured data, sitemap, and robots.txt
+- **Google Analytics** — Integrated tracking for visitor insights
+
+## 🛠️ Tech Stack
+
+| Layer       | Technologies                                        |
+|-------------|-----------------------------------------------------|
+| Framework   | Next.js 14 (App Router)                             |
+| Styling     | Tailwind CSS, custom glassmorphism design system     |
+| Animations  | Framer Motion, Lenis smooth scroll                  |
+| Backend     | Next.js API Routes, MongoDB (Mongoose)              |
+| Email       | EmailJS                                             |
+| Icons       | React Icons, Lucide React                           |
+| Deployment  | Vercel                                              |
+| Analytics   | Google Analytics (GA4)                              |
+
+## 📂 Project Structure
+
+```
+src/
+├── app/
+│   ├── api/          # API routes (stats, projects, auth, etc.)
+│   ├── edit/         # Admin panel pages
+│   ├── layout.js     # Root layout with SEO metadata & JSON-LD
+│   └── page.js       # Main portfolio page
+├── components/
+│   ├── Hero.jsx      # Hero section with live stats cards
+│   ├── About.jsx     # About me section
+│   ├── Projects.jsx  # Project showcase grid
+│   ├── Skills.jsx    # Skills categorized display
+│   ├── Hackathons.jsx # Hackathon projects
+│   ├── Achievements.jsx # Certificates & achievements
+│   ├── Contact.jsx   # Contact form
+│   ├── Header.jsx    # Navigation header
+│   ├── Footer.jsx    # Footer
+│   ├── Resume.jsx    # Resume section
+│   ├── admin/        # Admin panel components
+│   └── ui/           # Reusable UI components
+└── models/           # Mongoose schemas
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔗 Connect
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **GitHub** — [github.com/priymavani](https://github.com/priymavani)
+- **LinkedIn** — [linkedin.com/in/priymavani](https://linkedin.com/in/priymavani)
+- **Email** — priymavani02@gmail.com
