@@ -140,12 +140,13 @@ const Hero = () => {
                       hideColorLegend
                       hideMonthLabels
                       hideTotalCount
+                      colorScheme="dark"
                       theme={{
                         dark: [
                           'rgba(255, 255, 255, 0.05)',
-                          'rgba(59, 130, 246, 0.5)',
-                          'rgba(59, 130, 246, 0.7)',
-                          'rgba(59, 130, 246, 0.85)',
+                          'rgba(59, 130, 246, 0.4)',
+                          'rgba(59, 130, 246, 0.6)',
+                          'rgba(59, 130, 246, 0.8)',
                           'rgba(59, 130, 246, 1)',
                         ],
                       }}
@@ -273,12 +274,13 @@ const Hero = () => {
                         hideColorLegend
                         hideMonthLabels
                         hideTotalCount
+                        colorScheme="dark"
                         theme={{
                           dark: [
                             'rgba(255, 255, 255, 0.05)',
-                            'rgba(59, 130, 246, 0.5)',
-                            'rgba(59, 130, 246, 0.7)',
-                            'rgba(59, 130, 246, 0.85)',
+                            'rgba(59, 130, 246, 0.4)',
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(59, 130, 246, 0.8)',
                             'rgba(59, 130, 246, 1)',
                           ],
                         }}

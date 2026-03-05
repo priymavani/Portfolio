@@ -85,9 +85,13 @@ export const metadata = {
       { url: "/favicon.png", type: "image/png" },
     ],
     apple: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/icons/icon-152x152.png", sizes: "152x152", type: "image/png" },
+      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
   },
+
+  // ── PWA Manifest ──
+  manifest: "/manifest.json",
 
   // ── Robots ──
   robots: {
@@ -104,7 +108,7 @@ export const metadata = {
 
   // ── Verification ──
   verification: {
-    google: "f8248598f7259801", 
+    google: "f8248598f7259801",
   },
 
   // ── Other ──
@@ -159,6 +163,19 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Service Worker Registration */}
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) { console.log('SW registered:', registration.scope); },
+                  function(err) { console.log('SW registration failed:', err); }
+                );
+              });
+            }
+          `}
+        </Script>
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#050505] text-white antialiased selection:bg-[#3B82F6] selection:text-white`}>
         {children}
