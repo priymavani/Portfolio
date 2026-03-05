@@ -25,7 +25,7 @@ export async function GET() {
         const socialLinks = {};
         if (profile?.socialLinks) {
             profile.socialLinks.forEach(link => {
-                socialLinks[link.platform] = link.url;
+                socialLinks[link.platform.toLowerCase()] = link.url;
             });
         }
 
