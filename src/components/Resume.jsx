@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionHeading from './ui/SectionHeading';
-import Button from './ui/Button';
 
 const Resume = () => {
   const [ref, inView] = useInView({
@@ -51,22 +50,18 @@ const Resume = () => {
 
               {/* Right: Actions */}
               <div className="p-10 flex flex-col justify-center bg-[#0A0A0A]">
-                <h3 className="font-display text-3xl font-bold text-white mb-4">Ready to collaborate?</h3>
+                <h3 className="font-display text-3xl font-bold text-[#3B82F6] mb-4">Ready to collaborate?</h3>
                 <p className="text-neutral-400 mb-8 leading-relaxed">
                   My resume provides a detailed overview of my technical stack, professional experience, and key accomplishments. Download it to see how I can contribute to your team.
                 </p>
 
                 <div className="flex flex-col gap-4">
-                  <a href="/Resume_PriyMavani.pdf" download className="w-full">
-                    <Button variant="primary" className="w-full py-4 text-base">
-                      <span className="mr-2">Download PDF</span>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    </Button>
+                  <a href="/Resume_PriyMavani.pdf" download className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-accent hover:bg-accent-glow text-white font-medium rounded-md text-base transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+                    <span>Download PDF</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                   </a>
-                  <a href="/Resume_PriyMavani.pdf" target="_blank" className="w-full">
-                    <Button variant="outline" className="w-full py-4 text-base">
-                      Open in Browser
-                    </Button>
+                  <a href="/resume" target="_self" className="w-full inline-flex items-center justify-center px-6 py-4 bg-transparent hover:bg-white/5 text-neutral-300 hover:text-white border border-white/10 hover:border-accent rounded-md text-base font-medium transition-all duration-200">
+                    Open in Browser
                   </a>
                 </div>
 

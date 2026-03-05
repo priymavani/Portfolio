@@ -9,9 +9,9 @@ const SectionHeading = ({ title, subtitle }) => {
   });
 
   return (
-    <div ref={ref} className="mb-16 md:mb-24 flex flex-col items-start border-l-2 border-[#D9FF00] pl-6">
+    <div ref={ref} className="mb-16 md:mb-24 flex flex-col items-start border-l-2 border-[#3B82F6] pl-6">
       <motion.h5
-        className="font-sans text-sm uppercase tracking-[0.2em] text-[#D9FF00] mb-3"
+        className="font-sans text-sm uppercase tracking-[0.2em] text-[#3B82F6] mb-3"
         initial={{ opacity: 0, x: -20 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
         transition={{ duration: 0.5 }}

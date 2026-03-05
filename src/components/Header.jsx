@@ -22,6 +22,7 @@ const Header = () => {
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
     { name: 'Credentials', href: '#achievements' },
+    { name: 'Resume', href: '#resume' },
   ];
 
   const handleNavClick = (href) => {
@@ -63,10 +64,10 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-4">
           <div className="flex items-center gap-4 border-r border-white/10 pr-4">
             {socialLinks?.github && (
-              <a href={socialLinks.github} target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white transition-colors"><FaGithub /></a>
+              <a href={socialLinks.github} target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white transition-colors text-2xl"><FaGithub /></a>
             )}
             {socialLinks?.linkedin && (
-              <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white transition-colors"><FaLinkedin /></a>
+              <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white transition-colors text-2xl"><FaLinkedin /></a>
             )}
           </div>
           <button
