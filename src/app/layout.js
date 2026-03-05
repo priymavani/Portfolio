@@ -1,29 +1,165 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
-// 1. Setup Inter (The Primary Font)
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
 
-// 2. Setup JetBrains Mono (For Code Snippets only)
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-medium",
   display: "swap",
 });
 
+const siteUrl = "https://www.priymavani.in";
+
 export const metadata = {
-  title: "Priy Mavani | Full Stack Engineer",
-  description: "Building digital architecture. Full Stack Engineer focused on performance, accessibility, and pixel-perfect design systems.",
+  // ── Core Meta ──
+  title: {
+    default: "Priy Mavani | Full Stack Engineer — React, Node.js, Next.js",
+    template: "%s | Priy Mavani",
+  },
+  description:
+    "Full Stack Engineer specializing in scalable React architectures, secure Node.js environments, and pixel-perfect design systems. Open to work.",
+  keywords: [
+    "Priy Mavani",
+    "Full Stack Developer",
+    "Full Stack Engineer",
+    "React Developer",
+    "Node.js Developer",
+    "Next.js Developer",
+    "MERN Stack Developer",
+    "Web Developer Portfolio",
+    "Frontend Developer",
+    "Backend Developer",
+    "JavaScript Developer",
+    "Portfolio",
+    "Software Engineer India",
+  ],
+  authors: [{ name: "Priy Mavani", url: siteUrl }],
+  creator: "Priy Mavani",
+  publisher: "Priy Mavani",
+
+  // ── Canonical & Alternates ──
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+
+  // ── Open Graph (Facebook, LinkedIn, Discord) ──
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "Priy Mavani — Portfolio",
+    title: "Priy Mavani | Full Stack Engineer — React, Node.js, Next.js",
+    description:
+      "Building digital architecture. Full Stack Engineer focused on high-performance React apps, secure Node.js backends, and pixel-perfect design systems.",
+    images: [
+      {
+        url: "/profile-cutout.png",
+        width: 1200,
+        height: 630,
+        alt: "Priy Mavani — Full Stack Engineer",
+        type: "image/png",
+      },
+    ],
+  },
+
+  // ── Twitter / X Card ──
+  twitter: {
+    card: "summary_large_image",
+    title: "Priy Mavani | Full Stack Engineer",
+    description:
+      "Building digital architecture. Specializing in React, Node.js, Next.js, and MongoDB.",
+    images: ["/profile-cutout.png"],
+    creator: "@priymavani",
+  },
+
+  // ── Favicons & Icons ──
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+  },
+
+  // ── Robots ──
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  // ── Verification ──
+  verification: {
+    google: "f8248598f7259801", 
+  },
+
+  // ── Other ──
+  category: "technology",
+};
+
+// ── JSON-LD Structured Data ──
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Priy Mavani",
+  url: siteUrl,
+  image: `${siteUrl}/profile-cutout.png`,
+  jobTitle: "Full Stack Engineer",
+  description:
+    "Full Stack Engineer specializing in scalable React architectures, secure Node.js environments, and pixel-perfect design systems.",
+  knowsAbout: [
+    "React", "Next.js", "Node.js", "MongoDB", "JavaScript", "TypeScript",
+    "Express.js", "Tailwind CSS", "Full Stack Development", "Web Development",
+  ],
+  sameAs: [
+    "https://github.com/priymavani",
+    "https://linkedin.com/in/priymavani",
+  ],
+};
+
+export const viewport = {
+  themeColor: "#050505",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      {/* 3. Apply variables and set 'font-sans' as the GLOBAL default */}
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-6QLZZNMMNS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-6QLZZNMMNS');
+          `}
+        </Script>
+        {/* JSON-LD Structured Data for Google Rich Results */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#050505] text-white antialiased selection:bg-[#3B82F6] selection:text-white`}>
         {children}
       </body>

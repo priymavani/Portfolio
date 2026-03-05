@@ -1,13 +1,30 @@
 export default function sitemap() {
-    const baseUrl = 'https://portfolio-next-priymavani.vercel.app'; // Replace with actual domain
+    const baseUrl = 'https://www.priymavani.in';
 
     return [
         {
             url: baseUrl,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
+            changeFrequency: 'weekly',
             priority: 1,
         },
-        // Add other routes if you have multiple pages
+        {
+            url: `${baseUrl}/#projects`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/#achievements`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${baseUrl}/#contact`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
     ];
 }
