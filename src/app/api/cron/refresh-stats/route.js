@@ -8,6 +8,10 @@ const LEETCODE_USERNAME = "Priy_mavani";
 // CRON JOB ENDPOINT - Call this every 6 hours
 // POST /api/cron/refresh-stats
 export async function POST(request) {
+    return handleRefreshStats(request);
+}
+
+async function handleRefreshStats(request) {
     try {
         // Optional: Add authentication to prevent unauthorized calls
         const authHeader = request.headers.get('authorization');
@@ -134,9 +138,11 @@ async function fetchGitHubStats() {
 
                 if (!response.ok) throw new Error(`API returned ${response.status}`);
                 const data = await response.json();
+                const currentYear = new Date().getUTCFullYear();
+                const yearlyTotal = data.total?.[currentYear] ?? data.total?.[String(currentYear)];
 
                 return {
-                    total: data.total?.[2025] || data.total?.lastYear || 0,
+                    total: yearlyTotal ?? data.total?.lastYear ?? 0,
                     contributions: data.contributions || []
                 };
             }
