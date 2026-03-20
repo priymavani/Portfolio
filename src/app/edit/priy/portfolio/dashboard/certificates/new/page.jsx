@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardLayout from '@/components/admin/DashboardLayout';
-import { FormInput, Button, TagInput } from '@/components/admin/FormComponents';
+import { FormInput, FormCheckbox, Button, TagInput } from '@/components/admin/FormComponents';
 import Link from 'next/link';
 
 export default function NewCertificatePage() {
@@ -19,12 +19,13 @@ export default function NewCertificatePage() {
         credentialUrl: '',
         skills: [],
         issueDate: '',
+        visibility: true,
         order: 0,
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
     const handleSubmit = async (e) => {
@@ -142,6 +143,13 @@ export default function NewCertificatePage() {
                         value={formData.order}
                         onChange={handleChange}
                         placeholder="0"
+                    />
+
+                    <FormCheckbox
+                        label="Visible in Portfolio"
+                        name="visibility"
+                        checked={formData.visibility}
+                        onChange={handleChange}
                     />
 
                     {/* Actions */}

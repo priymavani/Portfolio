@@ -50,6 +50,10 @@ const certificateSchema = new mongoose.Schema({
         trim: true,
         maxlength: [500, 'Description cannot exceed 500 characters']
     },
+    visibility: {
+        type: Boolean,
+        default: true
+    },
     order: {
         type: Number,
         default: 0

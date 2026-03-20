@@ -37,6 +37,10 @@ const ProjectSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    visibility: {
+        type: Boolean,
+        default: true,
+    },
     isActive: {
         type: Boolean,
         default: true,

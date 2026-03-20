@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardLayout from '@/components/admin/DashboardLayout';
-import { FormInput, Button, TagInput } from '@/components/admin/FormComponents';
+import { FormInput, FormCheckbox, Button, TagInput } from '@/components/admin/FormComponents';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Link from 'next/link';
 
@@ -22,6 +22,7 @@ export default function EditCertificatePage() {
         credentialUrl: '',
         skills: [],
         issueDate: '',
+        visibility: true,
         order: 0,
     });
 
@@ -45,6 +46,7 @@ export default function EditCertificatePage() {
                     credentialUrl: cert.credentialUrl || '',
                     skills: cert.skills || [],
                     issueDate: cert.issueDate ? cert.issueDate.split('T')[0] : '',
+                    visibility: cert.visibility !== false ? true : false,
                     order: cert.order || 0,
                 });
             }
@@ -56,8 +58,8 @@ export default function EditCertificatePage() {
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
     const handleSubmit = async (e) => {
@@ -192,6 +194,13 @@ export default function EditCertificatePage() {
                         value={formData.order}
                         onChange={handleChange}
                         placeholder="0"
+                    />
+
+                    <FormCheckbox
+                        label="Visible in Portfolio"
+                        name="visibility"
+                        checked={formData.visibility}
+                        onChange={handleChange}
                     />
 
                     {/* Actions */}

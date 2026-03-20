@@ -20,7 +20,13 @@ export function PortfolioProvider({ children }) {
                 const res = await fetch('/api/portfolio');
                 const json = await res.json();
                 if (json.success) {
-                    setData(json.data);
+                    // Filter to only show visible items
+                    const filteredData = {
+                        ...json.data,
+                        certificates: (json.data.certificates || []).filter(c => c.visibility !== false),
+                        hackathons: (json.data.hackathons || []).filter(h => h.visibility !== false),
+                    };
+                    setData(filteredData);
                 }
             } catch (error) {
                 console.error('Failed to fetch portfolio data:', error);

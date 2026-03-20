@@ -152,7 +152,9 @@ const Projects = () => {
         const res = await fetch('/api/projects');
         const data = await res.json();
         if (data.success) {
-          setProjects(data.data);
+          // Filter to only show visible projects
+          const visibleProjects = data.data.filter(p => p.visibility !== false);
+          setProjects(visibleProjects);
         }
       } catch (error) {
         console.error("Failed to fetch projects:", error);

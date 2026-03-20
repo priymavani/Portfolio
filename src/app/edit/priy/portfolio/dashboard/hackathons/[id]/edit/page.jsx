@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardLayout from '@/components/admin/DashboardLayout';
 import ImageUploaderWithCrop from '@/components/admin/ImageUploaderWithCrop';
-import { FormInput, Button } from '@/components/admin/FormComponents';
+import { FormInput, FormCheckbox, Button } from '@/components/admin/FormComponents';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Link from 'next/link';
 import { FiArrowUp, FiArrowDown, FiTrash2, FiPlus } from 'react-icons/fi';
@@ -93,6 +93,7 @@ export default function EditHackathonPage() {
                         teamMembers: hackathon.teamMembers?.length > 0 ? hackathon.teamMembers : [{ name: '', role: '' }],
                         stages: stages,
                         finalStatus: hackathon.finalStatus || 'participated',
+                        visibility: hackathon.visibility !== false ? true : false,
                         order: hackathon.order || 0,
                     });
                 }
@@ -112,8 +113,8 @@ export default function EditHackathonPage() {
     }, [params.id]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
     // Team Members Management
@@ -619,20 +620,38 @@ export default function EditHackathonPage() {
                     {/* Overall Result */}
                     <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                         <h2 className="text-xl font-semibold text-white mb-4">Overall Result</h2>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Final Status *</label>
-                            <select
-                                name="finalStatus"
-                                value={formData.finalStatus}
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-300 mb-2">Final Status *</label>
+                                <select
+                                    name="finalStatus"
+                                    value={formData.finalStatus}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
+                                    required
+                                >
+                                    <option value="participated">Participated</option>
+                                    <option value="finalist">Finalist</option>
+                                    <option value="winner">Winner</option>
+                                    <option value="runner-up">Runner-up</option>
+                                </select>
+                            </div>
+
+                            <FormInput
+                                label="Order"
+                                name="order"
+                                type="number"
+                                value={formData.order}
                                 onChange={handleChange}
-                                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
-                                required
-                            >
-                                <option value="participated">Participated</option>
-                                <option value="finalist">Finalist</option>
-                                <option value="winner">Winner</option>
-                                <option value="runner-up">Runner-up</option>
-                            </select>
+                                placeholder="0"
+                            />
+
+                            <FormCheckbox
+                                label="Visible in Portfolio"
+                                name="visibility"
+                                checked={formData.visibility}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
 

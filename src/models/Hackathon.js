@@ -133,6 +133,10 @@ const HackathonSchema = new mongoose.Schema({
         required: false,
         default: undefined
     },
+    visibility: {
+        type: Boolean,
+        default: true,
+    },
     order: {
         type: Number,
         default: 0,

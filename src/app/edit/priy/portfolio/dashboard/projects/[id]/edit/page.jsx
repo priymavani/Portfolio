@@ -26,6 +26,7 @@ export default function EditProjectPage() {
         postman: '',
         video: '',
         featured: false,
+        visibility: true,
         order: 0,
     });
 
@@ -55,6 +56,7 @@ export default function EditProjectPage() {
                     postman: data.data.postman || '',
                     video: data.data.video || '',
                     featured: data.data.featured || false,
+                    visibility: data.data.visibility !== false ? true : false,
                     order: data.data.order || 0,
                 });
             } else {
@@ -223,12 +225,21 @@ export default function EditProjectPage() {
                         />
                     </div>
 
-                    <FormCheckbox
-                        label="Featured Project"
-                        name="featured"
-                        checked={formData.featured}
-                        onChange={handleChange}
-                    />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormCheckbox
+                            label="Featured Project"
+                            name="featured"
+                            checked={formData.featured}
+                            onChange={handleChange}
+                        />
+
+                        <FormCheckbox
+                            label="Visible in Portfolio"
+                            name="visibility"
+                            checked={formData.visibility}
+                            onChange={handleChange}
+                        />
+                    </div>
 
                     {/* Actions */}
                     <div className="flex gap-4 pt-4">
