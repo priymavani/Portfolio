@@ -47,7 +47,7 @@ export default function NewExperiencePage() {
                 router.push('/edit/priy/portfolio/dashboard/experience');
             } else {
                 const error = await res.json();
-                alert(error.message || 'Failed to create experience');
+                alert(error.message || error.error?.message || 'Failed to create experience');
             }
         } catch (error) {
             console.error('Error creating experience:', error);

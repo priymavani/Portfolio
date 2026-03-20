@@ -12,6 +12,7 @@ export default function ProfilePage() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [hasProfile, setHasProfile] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         title: '',
@@ -42,8 +43,14 @@ export default function ProfilePage() {
     const fetchProfile = async () => {
         try {
             const res = await fetch('/api/my-details');
+            if (!res.ok) {
+                setHasProfile(false);
+                return;
+            }
+
             const data = await res.json();
             if (data.success && data.data) {
+                setHasProfile(true);
                 const profile = data.data;
                 setFormData({
                     name: profile.name || '',
@@ -52,7 +59,7 @@ export default function ProfilePage() {
                     shortBio: profile.shortBio || '',
                     photo: profile.photo || '',
                     location: profile.location || '',
-                    availability: profile.availability || 'available',
+                    availability: profile.availability === 'unavailable' ? 'not-available' : (profile.availability || 'available'),
                     yearsOfExperience: profile.yearsOfExperience || 0,
                     tagline: profile.tagline || '',
                 });
@@ -62,6 +69,7 @@ export default function ProfilePage() {
             }
         } catch (error) {
             console.error('Error fetching profile:', error);
+            setHasProfile(false);
         } finally {
             setLoading(false);
         }
@@ -91,17 +99,25 @@ export default function ProfilePage() {
         setSaving(true);
 
         try {
+            const filteredSocialLinks = socialLinks.filter(
+                (link) => link.platform && link.url
+            );
+
+            const method = hasProfile ? 'PUT' : 'POST';
+
             const res = await fetch('/api/my-details', {
-                method: 'PUT',
+                method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, socialLinks })
+                body: JSON.stringify({ ...formData, socialLinks: filteredSocialLinks })
             });
 
+            const result = await res.json();
+
             if (res.ok) {
-                alert('Profile updated successfully!');
+                setHasProfile(true);
+                alert('Profile saved successfully!');
             } else {
-                const error = await res.json();
-                alert(error.message || 'Failed to update profile');
+                alert(result.message || result.error?.message || 'Failed to update profile');
             }
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -142,7 +158,7 @@ export default function ProfilePage() {
                     <FormTextarea label="Short Bio" name="shortBio" value={formData.shortBio} onChange={handleChange} placeholder="A brief one-liner" rows={2} />
                     <FormInput label="Tagline" name="tagline" value={formData.tagline} onChange={handleChange} placeholder="e.g., Building the web, one line at a time" />
 
-                    <FormInput label="Profile Photo URL" name="photo" value={formData.photo} onChange={handleChange} placeholder="https://example.com/photo.jpg" />
+                    <FormInput label="Profile Photo URL" name="photo" value={formData.photo} onChange={handleChange} placeholder="https://example.com/photo.jpg" required />
 
                     {formData.photo && (
                         <div className="border border-gray-700 rounded-lg overflow-hidden w-32 h-32">
@@ -161,7 +177,7 @@ export default function ProfilePage() {
                             options={[
                                 { value: 'available', label: 'Available' },
                                 { value: 'busy', label: 'Busy' },
-                                { value: 'unavailable', label: 'Unavailable' },
+                                { value: 'not-available', label: 'Unavailable' },
                             ]}
                         />
 

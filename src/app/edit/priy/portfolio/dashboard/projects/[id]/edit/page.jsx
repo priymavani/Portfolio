@@ -92,7 +92,7 @@ export default function EditProjectPage() {
                 router.push('/edit/priy/portfolio/dashboard/projects');
             } else {
                 const error = await res.json();
-                alert(error.message || 'Failed to update project');
+                alert(error.message || error.error?.message || 'Failed to update project');
             }
         } catch (error) {
             console.error('Error updating project:', error);

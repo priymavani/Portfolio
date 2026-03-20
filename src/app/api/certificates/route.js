@@ -1,7 +1,22 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/database';
 import Certificate from '@/models/Certificate';
+import User from '@/models/User';
+import { isAuthenticated } from '@/lib/auth';
 import { ApiResponse, ApiError, asyncHandler } from '@/lib/apiUtils';
+
+const requireAdmin = async (request) => {
+    const { authenticated, userId } = await isAuthenticated(request);
+
+    if (!authenticated) {
+        throw new ApiError('Not authenticated', 401);
+    }
+
+    const user = await User.findById(userId).select('role isActive').lean();
+    if (!user || !user.isActive || user.role !== 'admin') {
+        throw new ApiError('Forbidden', 403);
+    }
+};
 
 // GET /api/certificates - Get all certificates
 export const GET = asyncHandler(async (request) => {
@@ -42,6 +57,7 @@ export const GET = asyncHandler(async (request) => {
 // POST /api/certificates - Create new certificate (Admin only)
 export const POST = asyncHandler(async (request) => {
     await connectDB();
+    await requireAdmin(request);
 
     const body = await request.json();
 

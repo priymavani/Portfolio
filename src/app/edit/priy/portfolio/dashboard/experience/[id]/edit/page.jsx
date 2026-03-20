@@ -77,7 +77,7 @@ export default function EditExperiencePage() {
                 router.push('/edit/priy/portfolio/dashboard/experience');
             } else {
                 const error = await res.json();
-                alert(error.message || 'Failed to update experience');
+                alert(error.message || error.error?.message || 'Failed to update experience');
             }
         } catch (error) {
             console.error('Error updating experience:', error);

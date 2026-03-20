@@ -2,7 +2,22 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/database';
 import Hackathon from '@/models/Hackathon';
 import Project from '@/models/Project';
+import User from '@/models/User';
+import { isAuthenticated } from '@/lib/auth';
 import { ApiResponse, ApiError, asyncHandler } from '@/lib/apiUtils';
+
+const requireAdmin = async (request) => {
+    const { authenticated, userId } = await isAuthenticated(request);
+
+    if (!authenticated) {
+        throw new ApiError('Not authenticated', 401);
+    }
+
+    const user = await User.findById(userId).select('role isActive').lean();
+    if (!user || !user.isActive || user.role !== 'admin') {
+        throw new ApiError('Forbidden', 403);
+    }
+};
 
 // GET /api/hackathons/[id] - Get single hackathon
 export const GET = asyncHandler(async (request, { params }) => {
@@ -22,6 +37,7 @@ export const GET = asyncHandler(async (request, { params }) => {
 // PUT /api/hackathons/[id] - Update hackathon
 export const PUT = asyncHandler(async (request, { params }) => {
     await connectDB();
+    await requireAdmin(request);
 
     const body = await request.json();
 
@@ -89,6 +105,7 @@ export const PUT = asyncHandler(async (request, { params }) => {
 // DELETE /api/hackathons/[id] - Soft delete hackathon
 export const DELETE = asyncHandler(async (request, { params }) => {
     await connectDB();
+    await requireAdmin(request);
 
     const hackathon = await Hackathon.findByIdAndUpdate(
         params.id,

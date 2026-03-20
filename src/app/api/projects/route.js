@@ -1,7 +1,22 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/database';
 import Project from '@/models/Project';
+import User from '@/models/User';
+import { isAuthenticated } from '@/lib/auth';
 import { ApiResponse, ApiError, asyncHandler } from '@/lib/apiUtils';
+
+const requireAdmin = async (request) => {
+    const { authenticated, userId } = await isAuthenticated(request);
+
+    if (!authenticated) {
+        throw new ApiError('Not authenticated', 401);
+    }
+
+    const user = await User.findById(userId).select('role isActive').lean();
+    if (!user || !user.isActive || user.role !== 'admin') {
+        throw new ApiError('Forbidden', 403);
+    }
+};
 
 // GET /api/projects - Get all projects
 export const GET = asyncHandler(async (request) => {
@@ -60,6 +75,7 @@ export const GET = asyncHandler(async (request) => {
 // POST /api/projects - Create new project (Admin only)
 export const POST = asyncHandler(async (request) => {
     await connectDB();
+    await requireAdmin(request);
 
     const body = await request.json();
 

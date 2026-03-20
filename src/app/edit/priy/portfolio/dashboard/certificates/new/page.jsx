@@ -42,7 +42,7 @@ export default function NewCertificatePage() {
                 router.push('/edit/priy/portfolio/dashboard/certificates');
             } else {
                 const error = await res.json();
-                alert(error.message || 'Failed to create certificate');
+                alert(error.message || error.error?.message || 'Failed to create certificate');
             }
         } catch (error) {
             console.error('Error creating certificate:', error);
@@ -96,6 +96,7 @@ export default function NewCertificatePage() {
                             value={formData.credentialId}
                             onChange={handleChange}
                             placeholder="e.g., ABC123XYZ"
+                            required
                         />
                     </div>
 
@@ -115,6 +116,7 @@ export default function NewCertificatePage() {
                             value={formData.credentialUrl}
                             onChange={handleChange}
                             placeholder="https://..."
+                            required
                         />
 
                         <FormInput

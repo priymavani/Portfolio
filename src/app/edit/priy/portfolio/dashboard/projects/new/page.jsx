@@ -50,7 +50,7 @@ export default function NewProjectPage() {
                 router.push('/edit/priy/portfolio/dashboard/projects');
             } else {
                 const error = await res.json();
-                alert(error.message || 'Failed to create project');
+                alert(error.message || error.error?.message || 'Failed to create project');
             }
         } catch (error) {
             console.error('Error creating project:', error);

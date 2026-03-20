@@ -4,9 +4,18 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import DashboardLayout from '@/components/admin/DashboardLayout';
-import { FormInput, Button } from '@/components/admin/FormComponents';
+import { FormInput, FormSelect, Button } from '@/components/admin/FormComponents';
 import LoadingSpinner from '@/components/admin/LoadingSpinner';
 import Link from 'next/link';
+
+const SKILL_CATEGORY_OPTIONS = [
+    { value: 'Frontend', label: 'Frontend' },
+    { value: 'Backend', label: 'Backend' },
+    { value: 'Tools & Technologies', label: 'Tools & Technologies' },
+    { value: 'Other Skills', label: 'Other Skills' },
+    { value: 'Database', label: 'Database' },
+    { value: 'DevOps', label: 'DevOps' },
+];
 
 export default function EditSkillPage() {
     const { user } = useAuth();
@@ -78,7 +87,7 @@ export default function EditSkillPage() {
                 router.push('/edit/priy/portfolio/dashboard/skills');
             } else {
                 const error = await res.json();
-                alert(error.message || 'Failed to update skill category');
+                alert(error.message || error.error?.message || 'Failed to update skill category');
             }
         } catch (error) {
             console.error('Error updating skill:', error);
@@ -118,12 +127,12 @@ export default function EditSkillPage() {
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <FormInput
+                        <FormSelect
                             label="Category Name"
                             name="category"
                             value={formData.category}
                             onChange={handleChange}
-                            placeholder="e.g., Frontend, Backend"
+                            options={SKILL_CATEGORY_OPTIONS}
                             required
                         />
 
@@ -181,6 +190,7 @@ export default function EditSkillPage() {
                                         value={item.icon}
                                         onChange={(e) => handleItemChange(index, 'icon', e.target.value)}
                                         placeholder="e.g., ⚛️ or SiReact"
+                                        required
                                     />
 
                                     <div className="space-y-2">

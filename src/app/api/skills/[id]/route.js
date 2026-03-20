@@ -1,7 +1,22 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/database';
 import Skill from '@/models/Skill';
+import User from '@/models/User';
+import { isAuthenticated } from '@/lib/auth';
 import { ApiResponse, ApiError, asyncHandler } from '@/lib/apiUtils';
+
+const requireAdmin = async (request) => {
+    const { authenticated, userId } = await isAuthenticated(request);
+
+    if (!authenticated) {
+        throw new ApiError('Not authenticated', 401);
+    }
+
+    const user = await User.findById(userId).select('role isActive').lean();
+    if (!user || !user.isActive || user.role !== 'admin') {
+        throw new ApiError('Forbidden', 403);
+    }
+};
 
 // GET /api/skills/[id] - Get single skill category
 export const GET = asyncHandler(async (request, context) => {
@@ -23,6 +38,7 @@ export const GET = asyncHandler(async (request, context) => {
 // PUT /api/skills/[id] - Update skill category (Admin only)
 export const PUT = asyncHandler(async (request, context) => {
     await connectDB();
+    await requireAdmin(request);
 
     const params = await context.params;
     const { id } = params;
@@ -46,6 +62,7 @@ export const PUT = asyncHandler(async (request, context) => {
 // DELETE /api/skills/[id] - Delete skill category (Admin only)
 export const DELETE = asyncHandler(async (request, context) => {
     await connectDB();
+    await requireAdmin(request);
 
     const params = await context.params;
     const { id } = params;
