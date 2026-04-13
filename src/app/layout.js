@@ -145,16 +145,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-6QLZZNMMNS"
-          strategy="afterInteractive"
+      {/* <!-- Google tag (gtag.js) --> */}
+     <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-6QLZZNMMNS" 
+          strategy="afterInteractive" 
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+
             gtag('config', 'G-6QLZZNMMNS');
           `}
         </Script>
