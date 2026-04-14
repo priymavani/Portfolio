@@ -24,6 +24,7 @@ export class ApiResponse {
         return {
             success: false,
             statusCode,
+            message,
             error: {
                 message,
                 ...(errors && { errors })
