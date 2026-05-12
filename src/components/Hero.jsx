@@ -125,7 +125,7 @@ const Hero = () => {
                   <h3 className="text-xs font-medium text-neutral-500 mb-1">GITHUB CONTRIBUTIONS</h3>
                   <div className="text-2xl font-bold text-white font-medium">
                     {stats.loading ? "..." : stats.github.total}
-                    <span className="text-sm text-neutral-500 font-normal ml-2">Commits (Last Year)</span>
+                    <span className="text-sm text-neutral-500 font-normal ml-2">Commits </span>
                   </div>
                 </div>
                 <div className="w-full overflow-x-auto overflow-y-hidden flex items-end opacity-90 pt-4">
@@ -259,7 +259,7 @@ const Hero = () => {
                     <h3 className="text-xs font-medium text-neutral-500 mb-1">GITHUB CONTRIBUTIONS</h3>
                     <div className="text-2xl font-bold text-white font-medium">
                       {stats.loading ? "..." : stats.github.total}
-                      <span className="text-sm text-neutral-500 font-normal ml-2">Commits (Last Year)</span>
+                      <span className="text-sm text-neutral-500 font-normal ml-2">Commits </span>
                     </div>
                   </div>
                   <div className="w-full overflow-hidden flex items-end opacity-90 pt-4">

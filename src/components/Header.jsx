@@ -21,8 +21,10 @@ const Header = () => {
     { name: 'Home', href: '#hero' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Hackathons', href: '#hackathons' },
     { name: 'Credentials', href: '#achievements' },
     { name: 'Resume', href: '#resume' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   const handleNavClick = (href) => {
