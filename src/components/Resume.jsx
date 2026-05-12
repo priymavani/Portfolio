@@ -67,7 +67,7 @@ const Resume = () => {
 
                 <div className="mt-8 pt-8 border-t border-white/5">
                   <p className="text-xs text-neutral-500 font-medium text-center uppercase tracking-widest">
-                    Last Updated: January 2026
+                    Last Updated: April 2026
                   </p>
                 </div>
               </div>
