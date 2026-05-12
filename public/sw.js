@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-v1';
+const CACHE_NAME = 'Priy portfolio';
 
 // Assets to cache on install
 const PRECACHE_ASSETS = [
@@ -35,14 +35,16 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     const { request } = event;
 
-    // Skip non-GET requests and API calls
+    // Skip non-GET requests (we only cache GET)
     if (request.method !== 'GET') return;
-    if (request.url.includes('/api/')) return;
+    
+    // Skip browser extensions
+    if (!request.url.startsWith('http')) return;
 
     event.respondWith(
         fetch(request)
             .then((response) => {
-                // Cache successful responses
+                // Cache successful responses (including /api/ and /_next/ assets)
                 if (response.ok) {
                     const responseClone = response.clone();
                     caches.open(CACHE_NAME).then((cache) => {
@@ -59,6 +61,7 @@ self.addEventListener('fetch', (event) => {
                     if (request.mode === 'navigate') {
                         return caches.match('/');
                     }
+                    return new Response(null, { status: 404 });
                 });
             })
     );
