@@ -6,6 +6,9 @@ import Hackathon from '@/models/Hackathon';
 import MyDetail from '@/models/MyDetail';
 import Stats from '@/models/Stats';
 
+// Force Next.js to dynamically render this route on each request instead of caching it at build time
+export const dynamic = 'force-dynamic';
+
 // GET /api/portfolio - Aggregated endpoint: returns ALL portfolio data in a single request
 export async function GET() {
     try {

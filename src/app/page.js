@@ -8,12 +8,14 @@ import Achievements from "@/components/Achievements";
 import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import EntryPopup from "@/components/EntryPopup";
 import { PortfolioProvider } from "@/contexts/PortfolioContext";
 
 export default function Home() {
   return (
     <PortfolioProvider>
       <main className="bg-[#050505] min-h-screen text-white relative">
+        <EntryPopup />
         <Navbar />
         <Hero />
         <Skills />
