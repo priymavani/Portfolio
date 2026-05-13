@@ -9,6 +9,7 @@ import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import EntryPopup from "@/components/EntryPopup";
+import InstallPrompt from "@/components/InstallPrompt";
 import { PortfolioProvider } from "@/contexts/PortfolioContext";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
     <PortfolioProvider>
       <main className="bg-[#050505] min-h-screen text-white relative">
         <EntryPopup />
+        <InstallPrompt />
         <Navbar />
         <Hero />
         <Skills />
