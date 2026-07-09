@@ -73,6 +73,16 @@ export default function EditSkillPage() {
         setItems(items.filter((_, i) => i !== index));
     };
 
+    const moveItem = (index, direction) => {
+        const targetIndex = index + direction;
+        if (targetIndex < 0 || targetIndex >= items.length) return;
+        const newItems = [...items];
+        const temp = newItems[index];
+        newItems[index] = newItems[targetIndex];
+        newItems[targetIndex] = temp;
+        setItems(newItems);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
@@ -164,15 +174,37 @@ export default function EditSkillPage() {
                             <div key={index} className="bg-gray-700 border border-gray-600 rounded-lg p-4">
                                 <div className="flex justify-between items-start mb-4">
                                     <h4 className="text-white font-medium">Skill {index + 1}</h4>
-                                    {items.length > 1 && (
-                                        <button
-                                            type="button"
-                                            onClick={() => removeItem(index)}
-                                            className="text-red-500 hover:text-red-400 text-sm"
-                                        >
-                                            Remove
-                                        </button>
-                                    )}
+                                    <div className="flex items-center gap-3">
+                                        {index > 0 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => moveItem(index, -1)}
+                                                className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+                                                title="Move Up"
+                                            >
+                                                ▲ Up
+                                            </button>
+                                        )}
+                                        {index < items.length - 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => moveItem(index, 1)}
+                                                className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+                                                title="Move Down"
+                                            >
+                                                ▼ Down
+                                            </button>
+                                        )}
+                                        {items.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => removeItem(index)}
+                                                className="text-red-500 hover:text-red-400 text-sm ml-2"
+                                            >
+                                                Remove
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
