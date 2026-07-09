@@ -1,32 +1,126 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import {
-    FaReact, FaHtml5, FaCss3, FaNodeJs, FaJava, FaAws, FaGitAlt, FaGithub, FaBrain
-} from 'react-icons/fa';
-import {
-    SiNextdotjs, SiJavascript, SiTailwindcss, SiFramer,
-    SiSpringboot, SiExpress, SiMongodb, SiPostgresql, SiMysql,
-    SiCplusplus, SiPostman, SiVercel
-} from 'react-icons/si';
-// Using the official VS Code icon library
-import { VscVscode } from 'react-icons/vsc';
+import { usePortfolio } from '../contexts/PortfolioContext';
+import { getDeviconComponent, getDeviconMonoComponent } from '../lib/iconMap';
 
+const categoryMeta = {
+    'Frontend': {
+        title: '// FRONTEND ECOSYSTEM',
+        description: 'Building immersive, pixel-perfect interfaces.',
+        cols: 'md:col-span-6 lg:col-span-6',
+    },
+    'Backend': {
+        title: '// BACKEND & DATABASE',
+        description: 'Architecting scalable, secure server-side logic.',
+        cols: 'md:col-span-6 lg:col-span-6',
+    },
+    'Database': {
+        title: '// DATABASE SYSTEMS',
+        description: 'Managing structured and unstructured data store.',
+        cols: 'md:col-span-6 lg:col-span-4',
+    },
+    'DevOps': {
+        title: '// DEVOPS & DEPLOYMENT',
+        description: 'CI/CD pipelines, containerization, and hosting.',
+        cols: 'md:col-span-6 lg:col-span-4',
+    },
+    'Tools & Technologies': {
+        title: '// CLOUD & TOOLS',
+        description: 'DevOps, deployment, and workflow efficiency.',
+        cols: 'md:col-span-6 lg:col-span-8',
+    },
+    'Other Skills': {
+        title: '// ADDITIONAL EXPERTISE',
+        description: 'Valuable auxiliary soft and technical capabilities.',
+        cols: 'md:col-span-6 lg:col-span-4',
+    },
+    'Core Engineering': {
+        title: '// CORE ENGINEERING',
+        description: 'Deep understanding of algorithms and systems.',
+        cols: 'md:col-span-6 lg:col-span-4',
+    }
+};
 
-const skillCategories = [
+const skillColorMap = {
+    // Frontend
+    'react': '#61DAFB',
+    'sireact': '#61DAFB',
+    'next.js': '#FFFFFF',
+    'sinextdotjs': '#FFFFFF',
+    'javascript': '#F7DF1E',
+    'sijavascript': '#F7DF1E',
+    'tailwind': '#06B6D4',
+    'sitailwindcss': '#06B6D4',
+    'html': '#E34F26',
+    'html5': '#E34F26',
+    'fahtml5': '#E34F26',
+    'sihtml5': '#E34F26',
+    'css': '#1572B6',
+    'css3': '#1572B6',
+    'facss3': '#1572B6',
+    'sicss3': '#1572B6',
+    'framer': '#0055FF',
+    'siframer': '#0055FF',
+    'typescript': '#3178C6',
+    'sitypescript': '#3178C6',
+
+    // Backend / DB
+    'node.js': '#339933',
+    'fanodejs': '#339933',
+    'sinodedotjs': '#339933',
+    'spring boot': '#6DB33F',
+    'sispringboot': '#6DB33F',
+    'express': '#ffffff',
+    'siexpress': '#ffffff',
+    'mongodb': '#47A248',
+    'simongodb': '#47A248',
+    'postgresql': '#4169E1',
+    'sipostgresql': '#4169E1',
+    'mysql': '#4479A1',
+    'simysql': '#4479A1',
+
+    // Core
+    'java': '#007396',
+    'fajava': '#007396',
+    'c++': '#00599C',
+    'sicplusplus': '#00599C',
+    'dsa': '#FFD700',
+    'fabrain': '#FFD700',
+
+    // Cloud / Tools
+    'aws': '#FF9900',
+    'faaws': '#FF9900',
+    'siamazonaws': '#FF9900',
+    'git': '#F05032',
+    'fagitalt': '#F05032',
+    'sigit': '#F05032',
+    'github': '#ffffff',
+    'fagithub': '#ffffff',
+    'sigithub': '#ffffff',
+    'vs code': '#007ACC',
+    'vscvscode': '#007ACC',
+    'postman': '#FF6C37',
+    'sipostman': '#FF6C37',
+    'vercel': '#ffffff',
+    'sivercel': '#ffffff',
+};
+
+// Fallback static data if DB is empty/loading
+const staticSkillCategories = [
     {
         id: 'frontend',
         title: '// FRONTEND ECOSYSTEM',
         description: 'Building immersive, pixel-perfect interfaces.',
         cols: 'md:col-span-6 lg:col-span-6',
         skills: [
-            { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
-            { name: 'React', icon: FaReact, color: '#61DAFB' },
-            { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-            { name: 'Tailwind', icon: SiTailwindcss, color: '#06B6D4' },
-            { name: 'HTML5', icon: FaHtml5, color: '#E34F26' },
-            { name: 'CSS3', icon: FaCss3, color: '#1572B6' },
-            { name: 'Framer', icon: SiFramer, color: '#0055FF' },
+            { name: 'Next.js', iconName: 'SiNextdotjs', color: '#FFFFFF' },
+            { name: 'React', iconName: 'FaReact', color: '#61DAFB' },
+            { name: 'JavaScript', iconName: 'SiJavascript', color: '#F7DF1E' },
+            { name: 'Tailwind', iconName: 'SiTailwindcss', color: '#06B6D4' },
+            { name: 'HTML5', iconName: 'FaHtml5', color: '#E34F26' },
+            { name: 'CSS3', iconName: 'FaCss3', color: '#1572B6' },
+            { name: 'Framer', iconName: 'SiFramer', color: '#0055FF' },
         ]
     },
     {
@@ -35,12 +129,12 @@ const skillCategories = [
         description: 'Architecting scalable, secure server-side logic.',
         cols: 'md:col-span-6 lg:col-span-6',
         skills: [
-            { name: 'Node.js', icon: FaNodeJs, color: '#339933' },
-            { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F' },
-            { name: 'Express', icon: SiExpress, color: '#ffffff' },
-            { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
-            { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
-            { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+            { name: 'Node.js', iconName: 'FaNodeJs', color: '#339933' },
+            { name: 'Spring Boot', iconName: 'SiSpringboot', color: '#6DB33F' },
+            { name: 'Express', iconName: 'SiExpress', color: '#ffffff' },
+            { name: 'MongoDB', iconName: 'SiMongodb', color: '#47A248' },
+            { name: 'PostgreSQL', iconName: 'SiPostgresql', color: '#4169E1' },
+            { name: 'MySQL', iconName: 'SiMysql', color: '#4479A1' },
         ]
     },
     {
@@ -49,9 +143,9 @@ const skillCategories = [
         description: 'Deep understanding of algorithms and systems.',
         cols: 'md:col-span-6 lg:col-span-4',
         skills: [
-            { name: 'Java', icon: FaJava, color: '#007396' },
-            { name: 'C++', icon: SiCplusplus, color: '#00599C' },
-            { name: 'DSA', icon: FaBrain, color: '#FFD700' },
+            { name: 'Java', iconName: 'FaJava', color: '#007396' },
+            { name: 'C++', iconName: 'SiCplusplus', color: '#00599C' },
+            { name: 'DSA', iconName: 'FaBrain', color: '#FFD700' },
         ]
     },
     {
@@ -60,12 +154,12 @@ const skillCategories = [
         description: 'DevOps, deployment, and workflow efficiency.',
         cols: 'md:col-span-6 lg:col-span-8',
         skills: [
-            { name: 'AWS', icon: FaAws, color: '#FF9900' },
-            { name: 'Git', icon: FaGitAlt, color: '#F05032' },
-            { name: 'GitHub', icon: FaGithub, color: '#ffffff' },
-            { name: 'VS Code', icon: VscVscode, color: '#007ACC' },
-            { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
-            { name: 'Vercel', icon: SiVercel, color: '#ffffff' },
+            { name: 'AWS', iconName: 'FaAws', color: '#FF9900' },
+            { name: 'Git', iconName: 'FaGitAlt', color: '#F05032' },
+            { name: 'GitHub', iconName: 'FaGithub', color: '#ffffff' },
+            { name: 'VS Code', iconName: 'VscVscode', color: '#007ACC' },
+            { name: 'Postman', iconName: 'SiPostman', color: '#FF6C37' },
+            { name: 'Vercel', iconName: 'SiVercel', color: '#ffffff' },
         ]
     }
 ];
@@ -115,6 +209,7 @@ const SpotlightCard = ({ children, className = "" }) => {
 const Skills = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const { skills: dbSkills, loading } = usePortfolio();
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -128,6 +223,40 @@ const Skills = () => {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
     };
+
+    // Transform DB skills or fallback to static skills
+    const displayCategories = (dbSkills && dbSkills.length > 0)
+        ? dbSkills.map(category => {
+            const meta = categoryMeta[category.category] || {
+                title: `// ${category.category.toUpperCase()}`,
+                description: 'Expertise and technical capabilities.',
+                cols: 'md:col-span-6 lg:col-span-4'
+            };
+            return {
+                id: category.category.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                title: meta.title,
+                description: meta.description,
+                cols: meta.cols,
+                skills: category.items.map(item => {
+                    const iconName = item.icon || 'FaCode';
+                    const color = skillColorMap[iconName.toLowerCase()] || skillColorMap[item.name.toLowerCase()] || '#D9FF00';
+                    const resolveIcon = item.isMono ? getDeviconMonoComponent : getDeviconComponent;
+                    return {
+                        name: item.name,
+                        icon: resolveIcon(iconName),
+                        color: color
+                    };
+                })
+            };
+        })
+        : staticSkillCategories.map(cat => ({
+            ...cat,
+            skills: cat.skills.map(s => ({
+                name: s.name,
+                icon: getDeviconComponent(s.iconName),
+                color: s.color
+            }))
+        }));
 
     return (
         <section id="skills" className="py-32 bg-background relative z-20">
@@ -154,7 +283,7 @@ const Skills = () => {
                     className="grid grid-cols-1 md:grid-cols-12 gap-6"
                 >
 
-                    {skillCategories.map((category) => (
+                    {displayCategories.map((category) => (
                         <motion.div key={category.id} variants={itemVariants} className={`${category.cols} row-span-1`}>
                             <SpotlightCard className="h-full bg-neutral-900/20 backdrop-blur-sm p-8 flex flex-col">
 
@@ -168,42 +297,44 @@ const Skills = () => {
 
                                 {/* Icons Grid */}
                                 <div className="flex flex-wrap gap-4">
-                                    {category.skills.map((skill, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="group flex flex-col items-center justify-center gap-2 w-24 h-28 p-2 rounded-lg bg-white/5 border border-white/5 hover:border-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 cursor-default"
-                                        >
-                                            {/* Icon Container */}
+                                    {category.skills.map((skill, idx) => {
+                                        const IconComponent = skill.icon;
+                                        return (
                                             <div
-                                                className="text-3xl transition-all duration-500 group-hover:scale-110 mb-1"
-                                                style={{
-                                                    color: skill.color,
-                                                    filter: 'drop-shadow(0 0 0 transparent)',
-                                                }}
+                                                key={idx}
+                                                className="group flex flex-col items-center justify-center gap-2 w-24 h-28 p-2 rounded-lg bg-white/5 border border-white/5 hover:border-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 cursor-default"
                                             >
-                                                <span
-                                                    className="opacity-70 group-hover:opacity-100 transition-opacity duration-300 block"
+                                                {/* Icon Container */}
+                                                <div
+                                                    className="text-3xl transition-all duration-500 group-hover:scale-110 mb-1"
                                                     style={{
-                                                        filter: 'var(--hover-filter)',
-                                                        '--hover-filter': `drop-shadow(0 0 10px ${skill.color})`
+                                                        color: skill.color,
+                                                        filter: 'drop-shadow(0 0 0 transparent)',
                                                     }}
                                                 >
-                                                    <style jsx>{`
-                                .group:hover span {
-                                    filter: drop-shadow(0 0 8px ${skill.color});
-                                }
-                            `}</style>
-                                                    <skill.icon />
+                                                    <span
+                                                        className="opacity-70 group-hover:opacity-100 transition-opacity duration-300 block"
+                                                        style={{
+                                                            filter: 'var(--hover-filter)',
+                                                            '--hover-filter': `drop-shadow(0 0 10px ${skill.color})`
+                                                        }}
+                                                    >
+                                                        <style jsx>{`
+                                    .group:hover span {
+                                        filter: drop-shadow(0 0 8px ${skill.color});
+                                    }
+                                `}</style>
+                                                        <IconComponent size="1.25em" />
+                                                    </span>
+                                                </div>
+
+                                                {/* Label - FIXED FONT FAMILY */}
+                                                <span className="text-xs text-neutral-300 font-medium group-hover:text-white transition-colors text-center truncate w-full">
+                                                    {skill.name}
                                                 </span>
                                             </div>
-
-                                            {/* Label - FIXED FONT FAMILY */}
-                                            {/* Removed 'font-medium'. Inherits default font (Inter). */}
-                                            <span className="text-xs text-neutral-300 font-medium group-hover:text-white transition-colors text-center truncate w-full">
-                                                {skill.name}
-                                            </span>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </SpotlightCard>
                         </motion.div>
@@ -211,8 +342,6 @@ const Skills = () => {
 
                 </motion.div>
             </div>
-   
-         
         </section>
     );
 };

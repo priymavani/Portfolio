@@ -14,6 +14,7 @@ const SKILL_CATEGORY_OPTIONS = [
     { value: 'Other Skills', label: 'Other Skills' },
     { value: 'Database', label: 'Database' },
     { value: 'DevOps', label: 'DevOps' },
+    { value: 'Core Engineering', label: 'Core Engineering' },
 ];
 
 export default function NewSkillPage() {
@@ -25,7 +26,7 @@ export default function NewSkillPage() {
         order: 0,
     });
     const [items, setItems] = useState([
-        { name: '', icon: '', proficiency: 50 }
+        { name: '', icon: '', proficiency: 50, isMono: false }
     ]);
 
     const handleChange = (e) => {
@@ -40,7 +41,7 @@ export default function NewSkillPage() {
     };
 
     const addItem = () => {
-        setItems([...items, { name: '', icon: '', proficiency: 50 }]);
+        setItems([...items, { name: '', icon: '', proficiency: 50, isMono: false }]);
     };
 
     const removeItem = (index) => {
@@ -139,7 +140,7 @@ export default function NewSkillPage() {
                                     )}
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                                     <FormInput
                                         label="Skill Name"
                                         name={`name-${index}`}
@@ -170,6 +171,19 @@ export default function NewSkillPage() {
                                             onChange={(e) => handleItemChange(index, 'proficiency', parseInt(e.target.value))}
                                             className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer"
                                         />
+                                    </div>
+
+                                    <div className="flex items-center gap-2 pt-6">
+                                        <input
+                                            type="checkbox"
+                                            id={`isMono-${index}`}
+                                            checked={item.isMono || false}
+                                            onChange={(e) => handleItemChange(index, 'isMono', e.target.checked)}
+                                            className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+                                        />
+                                        <label htmlFor={`isMono-${index}`} className="text-sm font-medium text-gray-300 cursor-pointer select-none">
+                                            Monochrome Icon
+                                        </label>
                                     </div>
                                 </div>
                             </div>

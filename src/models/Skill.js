@@ -16,6 +16,10 @@ const skillItemSchema = new mongoose.Schema({
         min: 0,
         max: 100,
         default: 70
+    },
+    isMono: {
+        type: Boolean,
+        default: false
     }
 }, { _id: false });
 
@@ -24,7 +28,7 @@ const skillSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Skill category is required'],
         trim: true,
-        enum: ['Frontend', 'Backend', 'Tools & Technologies', 'Other Skills', 'Database', 'DevOps']
+        enum: ['Frontend', 'Backend', 'Tools & Technologies', 'Other Skills', 'Database', 'DevOps', 'Core Engineering']
     },
     items: [skillItemSchema],
     order: {

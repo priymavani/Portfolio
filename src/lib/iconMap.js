@@ -1,49 +1,127 @@
 'use client';
-import {
-    SiHtml5, SiCss3, SiJavascript, SiReact, SiTailwindcss, SiBootstrap,
-    SiNodedotjs, SiExpress, SiMongodb, SiGit, SiGithub, SiPostman,
-    SiNetlify, SiVercel, SiFigma, SiNextdotjs, SiFramer, SiSpringboot,
-    SiPostgresql, SiMysql, SiCplusplus, SiTypescript, SiRedux, SiDocker,
-    SiFirebase, SiGraphql, SiPython, SiDjango, SiFlask, SiKubernetes,
-    SiLinux, SiNginx, SiRedis, SiSass, SiLess, SiWebpack, SiVite,
-    SiJest, SiCypress, SiStorybook, SiAmazonaws,
-} from 'react-icons/si';
-import {
-    FaCode, FaUsers, FaMobileAlt, FaReact, FaHtml5, FaCss3, FaNodeJs,
-    FaJava, FaAws, FaGitAlt, FaGithub, FaBrain, FaDatabase, FaServer,
-    FaLaptopCode, FaPalette, FaTerminal, FaCogs,
-} from 'react-icons/fa';
-import { VscVscode } from 'react-icons/vsc';
 
-// Map of string identifiers (stored in DB) → React icon components
-const iconMap = {
-    // Si (Simple Icons) - technology brands
-    SiHtml5, SiCss3, SiJavascript, SiReact, SiTailwindcss, SiBootstrap,
-    SiNodedotjs, SiExpress, SiMongodb, SiGit, SiGithub, SiPostman,
-    SiNetlify, SiVercel, SiFigma, SiNextdotjs, SiFramer, SiSpringboot,
-    SiPostgresql, SiMysql, SiCplusplus, SiTypescript, SiRedux, SiDocker,
-    SiFirebase, SiGraphql, SiPython, SiDjango, SiFlask, SiKubernetes,
-    SiLinux, SiNginx, SiRedis, SiSass, SiLess, SiWebpack, SiVite,
-    SiJest, SiCypress, SiStorybook, SiAmazonaws,
+import * as DevIcons from '@dev.icons/react';
+import * as MonoIcons from '@dev.icons/react/mono';
+import { FaCode } from 'react-icons/fa';
 
-    // Fa (Font Awesome) - general icons
-    FaCode, FaUsers, FaMobileAlt, FaReact, FaHtml5, FaCss3, FaNodeJs,
-    FaJava, FaAws, FaGitAlt, FaGithub, FaBrain, FaDatabase, FaServer,
-    FaLaptopCode, FaPalette, FaTerminal, FaCogs,
-
-    // VS Code icon
-    VscVscode,
+// Map of legacy react-icons or other database name variants to exact exports
+const nameMap = {
+    'react': '_React',
+    'sireact': '_React',
+    'fareact': '_React',
+    'react-original': '_React',
+    'nextjs': 'NextjsIcon',
+    'next.js': 'NextjsIcon',
+    'sinextdotjs': 'NextjsIcon',
+    'nextjs-plain': 'NextjsIcon',
+    'nextjs-original': 'NextjsIcon',
+    'javascript': 'Javascript',
+    'sijavascript': 'Javascript',
+    'javascript-plain': 'Javascript',
+    'tailwind': 'TailwindIcon',
+    'tailwindcss': 'TailwindIcon',
+    'sitailwindcss': 'TailwindIcon',
+    'tailwindcss-plain': 'TailwindIcon',
+    'html': 'Html5',
+    'html5': 'Html5',
+    'fahtml5': 'Html5',
+    'sihtml5': 'Html5',
+    'html5-plain': 'Html5',
+    'css': 'Css3Icon',
+    'css3': 'Css3Icon',
+    'facss3': 'Css3Icon',
+    'sicss3': 'Css3Icon',
+    'css3-plain': 'Css3Icon',
+    'framer': 'Framer',
+    'siframer': 'Framer',
+    'framer-original': 'Framer',
+    'node.js': 'NodejsIcon',
+    'fanodejs': 'NodejsIcon',
+    'sinodedotjs': 'NodejsIcon',
+    'nodejs': 'NodejsIcon',
+    'nodejs-plain': 'NodejsIcon',
+    'spring boot': 'SpringIcon',
+    'springboot': 'SpringIcon',
+    'sispringboot': 'SpringIcon',
+    'spring-plain': 'SpringIcon',
+    'express': 'Express',
+    'siexpress': 'Express',
+    'express-original': 'Express',
+    'mongodb': 'MongodbIcon',
+    'simongodb': 'MongodbIcon',
+    'mongodb-plain': 'MongodbIcon',
+    'postgresql': 'Postgresql',
+    'sipostgresql': 'Postgresql',
+    'postgresql-plain': 'Postgresql',
+    'mysql': 'MysqlIcon',
+    'simysql': 'MysqlIcon',
+    'mysql-plain': 'MysqlIcon',
+    'java': 'Java',
+    'fajava': 'Java',
+    'java-plain': 'Java',
+    'c++': 'CPlusplus',
+    'sicplusplus': 'CPlusplus',
+    'cplusplus-plain': 'CPlusplus',
+    'dsa': 'Cog',
+    'aws': 'Aws',
+    'faaws': 'Aws',
+    'siamazonaws': 'Aws',
+    'amazonwebservices-plain-wordmark': 'Aws',
+    'git': 'GitIcon',
+    'fagitalt': 'GitIcon',
+    'sigit': 'GitIcon',
+    'git-plain': 'GitIcon',
+    'github': 'GithubIcon',
+    'fagithub': 'GithubIcon',
+    'sigithub': 'GithubIcon',
+    'github-original': 'GithubIcon',
+    'vs code': 'VisualStudioCode',
+    'vscvscode': 'VisualStudioCode',
+    'vscode-plain': 'VisualStudioCode',
+    'postman': 'PostmanIcon',
+    'sipostman': 'PostmanIcon',
+    'postman-plain': 'PostmanIcon',
+    'vercel': 'VercelIcon',
+    'sivercel': 'VercelIcon',
+    'vercel-original': 'VercelIcon',
 };
 
-/**
- * Get a React icon component by its string identifier.
- * Falls back to FaCode if the icon is not found.
- * 
- * @param {string} iconName - The string name of the icon (e.g. "SiReact", "FaCode")
- * @returns {React.ComponentType} The icon component
- */
-export function getIcon(iconName) {
-    return iconMap[iconName] || FaCode;
+// Generic finder
+function findIconComponent(iconName, iconSet) {
+    if (!iconName) return null;
+    
+    const searchKey = iconName.toLowerCase().trim();
+    
+    // 1. Check custom mapping first
+    if (nameMap[searchKey] && iconSet[nameMap[searchKey]]) {
+        return iconSet[nameMap[searchKey]];
+    }
+    
+    const keys = Object.keys(iconSet);
+    
+    // 2. Try finding standalone name + Icon first
+    const iconKey = keys.find(k => k.toLowerCase() === `${searchKey}icon`);
+    if (iconKey) return iconSet[iconKey];
+    
+    // 3. Try finding exact case-insensitive match
+    const exactKey = keys.find(k => k.toLowerCase() === searchKey);
+    if (exactKey) return iconSet[exactKey];
+    
+    return null;
 }
 
-export default iconMap;
+/**
+ * Returns a colored React icon component from `@dev.icons/react`.
+ * Falls back to FaCode if not found.
+ */
+export function getDeviconComponent(iconName) {
+    return findIconComponent(iconName, DevIcons) || FaCode;
+}
+
+/**
+ * Returns a monochrome React icon component from `@dev.icons/react/mono`.
+ * Falls back to FaCode if not found.
+ */
+export function getDeviconMonoComponent(iconName) {
+    return findIconComponent(iconName, MonoIcons) || FaCode;
+}
