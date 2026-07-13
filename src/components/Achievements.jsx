@@ -42,7 +42,7 @@ const TiltCard = ({ cert }) => {
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full aspect-[1.586/1] rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-md group"
+      className="relative w-full rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-md group flex flex-col overflow-hidden"
     >
       <div
         className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
@@ -52,34 +52,69 @@ const TiltCard = ({ cert }) => {
         }}
       />
 
-      <div className="absolute inset-4 flex flex-col justify-between" style={{ transform: "translateZ(20px)" }}>
-        <div className="flex justify-between items-start">
-          <div className="flex items-center gap-2 text-white/50">
-            <FaAward className="text-accent" />
-            <span className="text-[10px] font-medium tracking-widest uppercase">{cert.issuer}</span>
-          </div>
-          <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
-            <div className="w-5 h-5 border border-yellow-500/50 rounded-sm bg-yellow-500/10 grid grid-cols-2 gap-[1px] p-[2px]">
-              <div className="bg-yellow-500/40 rounded-[1px]"></div>
-              <div className="bg-yellow-500/40 rounded-[1px]"></div>
-              <div className="bg-yellow-500/40 rounded-[1px]"></div>
-              <div className="bg-yellow-500/40 rounded-[1px]"></div>
+      {/* Visual Header Section */}
+      <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 relative overflow-hidden flex-shrink-0">
+        <img
+          src={cert.image}
+          alt={cert.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Remaining content wrapped in container */}
+      <div className="p-5 flex-grow flex flex-col justify-between" style={{ transform: "translateZ(20px)" }}>
+        <div className="flex-grow flex flex-col gap-3">
+          <div className="flex justify-between items-start">
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center gap-2 text-white/50">
+                <FaAward className="text-accent" />
+                <span className="text-[10px] font-medium tracking-widest uppercase">{cert.issuer}</span>
+              </div>
+              {cert.issueDate && (
+                <span className="text-[9px] text-neutral-500">
+                  Issued: {new Date(cert.issueDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                </span>
+              )}
+            </div>
+            
+            <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 border border-yellow-500/50 rounded-sm bg-yellow-500/10 grid grid-cols-2 gap-[1px] p-[2px]">
+                <div className="bg-yellow-500/40 rounded-[1px]"></div>
+                <div className="bg-yellow-500/40 rounded-[1px]"></div>
+                <div className="bg-yellow-500/40 rounded-[1px]"></div>
+                <div className="bg-yellow-500/40 rounded-[1px]"></div>
+              </div>
             </div>
           </div>
+
+          <div>
+            <h3 className="text-white font-bold text-lg leading-tight mb-1">{cert.title}</h3>
+            {cert.description && (
+              <p className="text-neutral-400 text-xs leading-relaxed mt-2 mb-3">
+                {cert.description}
+              </p>
+            )}
+            
+            {cert.skills && cert.skills.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {cert.skills.map((skill, index) => (
+                  <span key={index} className="text-[9px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-neutral-400 font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        <div>
-          <h3 className="text-white font-bold text-lg md:text-xl leading-tight mb-1">{cert.title}</h3>
-          <p className="text-neutral-500 text-xs">Verified Certification</p>
-        </div>
-
-        <div className="flex justify-between items-end border-t border-white/10 pt-3">
+        {/* Footer Section */}
+        <div className="flex justify-between items-end border-t border-white/10 pt-4 mt-6">
           <div>
             <div className="flex items-center gap-1 text-neutral-600 mb-1">
               <FaFingerprint size={10} />
               <span className="text-[8px] uppercase tracking-widest">Credential ID</span>
             </div>
-            <div className="font-medium text-xs text-accent/80 tracking-wider">
+            <div className="font-medium text-xs text-accent/80 tracking-wider font-mono">
               {cert.credentialId ? cert.credentialId : "VALID-2025"}
             </div>
           </div>
@@ -88,7 +123,7 @@ const TiltCard = ({ cert }) => {
             href={cert.credentialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] font-bold text-black bg-white px-3 py-1 rounded hover:bg-accent hover:text-white transition-colors"
+            className="text-[10px] font-bold text-black bg-white px-3 py-1.5 rounded hover:bg-accent hover:text-white transition-colors flex-shrink-0"
           >
             VERIFY
           </a>
