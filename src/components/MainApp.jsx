@@ -10,6 +10,7 @@ import Cursor from './ui/Cursor';
 import Achievements from './Achievements';
 import Resume from './Resume';
 import { motion, AnimatePresence } from 'framer-motion';
+import MorphText from './ui/MorphText';
 
 function MainApp() {
     const [loading, setLoading] = useState(true);
@@ -84,6 +85,9 @@ function MainApp() {
                         <Resume />
                         <Contact />
                     </main>
+                    <section className="w-full py-24 flex justify-center items-center overflow-hidden">
+                        <MorphText words={["PRIY MAVANI", "DEVELOPER", "BUILD", "SHIP"]} subtext="The Art of Code" />
+                    </section>
                     <Footer />
                 </>
             )}
