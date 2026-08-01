@@ -2,7 +2,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { getDeviconComponent, getDeviconMonoComponent } from '../lib/iconMap';
+import dynamic from 'next/dynamic';
+
+const DynamicDevicon = dynamic(() => import('./ui/DynamicDevicon'), {
+    ssr: false,
+    loading: () => <div className="w-5 h-5 bg-white/5 animate-pulse rounded-full" />
+});
 import SectionHeading from './ui/SectionHeading';
 import { usePortfolio } from '../contexts/PortfolioContext';
 
@@ -105,9 +110,6 @@ const About = () => {
                     <h4 className="text-sm font-bold uppercase tracking-wider text-neutral-500 mb-5 border-b border-white/5 pb-2">{skillGroup.category}</h4>
                     <div className="flex flex-wrap gap-3">
                       {skillGroup.items.map((item, index) => {
-                        const IconComponent = item.isMono
-                          ? getDeviconMonoComponent(item.icon)
-                          : getDeviconComponent(item.icon);
                         return (
                           <motion.div
                             key={index}
@@ -115,7 +117,7 @@ const About = () => {
                             whileHover={{ y: -3 }}
                           >
                             <span className="text-neutral-400 group-hover:text-[#D9FF00] transition-colors">
-                              <IconComponent size="1.25em" />
+                              <DynamicDevicon iconName={item.icon} isMono={item.isMono} size="1.25em" />
                             </span>
                             <span className="text-sm font-medium text-neutral-300 group-hover:text-white">{item.name}</span>
                           </motion.div>

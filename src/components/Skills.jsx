@@ -2,7 +2,12 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { usePortfolio } from '../contexts/PortfolioContext';
-import { getDeviconComponent, getDeviconMonoComponent } from '../lib/iconMap';
+import dynamic from 'next/dynamic';
+
+const DynamicDevicon = dynamic(() => import('./ui/DynamicDevicon'), {
+    ssr: false,
+    loading: () => <div className="w-8 h-8 bg-white/5 animate-pulse rounded-full" />
+});
 
 const categoryMeta = {
     'Frontend': {
@@ -240,10 +245,10 @@ const Skills = () => {
                 skills: category.items.map(item => {
                     const iconName = item.icon || 'FaCode';
                     const color = skillColorMap[iconName.toLowerCase()] || skillColorMap[item.name.toLowerCase()] || '#D9FF00';
-                    const resolveIcon = item.isMono ? getDeviconMonoComponent : getDeviconComponent;
                     return {
                         name: item.name,
-                        icon: resolveIcon(iconName),
+                        iconName: iconName,
+                        isMono: item.isMono || false,
                         color: color
                     };
                 })
@@ -253,7 +258,8 @@ const Skills = () => {
             ...cat,
             skills: cat.skills.map(s => ({
                 name: s.name,
-                icon: getDeviconComponent(s.iconName),
+                iconName: s.iconName,
+                isMono: s.isMono || false,
                 color: s.color
             }))
         }));
@@ -298,7 +304,6 @@ const Skills = () => {
                                 {/* Icons Grid */}
                                 <div className="flex flex-wrap gap-4">
                                     {category.skills.map((skill, idx) => {
-                                        const IconComponent = skill.icon;
                                         return (
                                             <div
                                                 key={idx}
@@ -324,7 +329,7 @@ const Skills = () => {
                                         filter: drop-shadow(0 0 8px ${skill.color});
                                     }
                                 `}</style>
-                                                        <IconComponent size="1.25em" />
+                                                        <DynamicDevicon iconName={skill.iconName} isMono={skill.isMono} size="1.25em" />
                                                     </span>
                                                 </div>
 
