@@ -1,155 +1,8 @@
 'use client';
 
-import {
-  NextjsIcon,
-  _React,
-  Html5,
-  Css3Icon,
-  Javascript,
-  TailwindIcon,
-  Bootstrap,
-  Framer,
-  NodejsIcon,
-  Express,
-  MongodbIcon,
-  SpringIcon,
-  Auth0,
-  MysqlIcon,
-  Postgresql,
-  Supabase,
-  Neon,
-  Prisma,
-  Langchain,
-  GitIcon,
-  GithubIcon,
-  PostmanIcon,
-  Aws,
-  MicrosoftAzure,
-  Cloudflare,
-  Figma,
-  Docker,
-  Kubernetes,
-  Jenkins,
-  Netlify,
-  VercelIcon,
-  CPlusplus,
-  Java,
-  Python
-} from '@dev.icons/react';
-
-import {
-  NextjsIcon as MonoNextjsIcon,
-  _React as Mono_React,
-  Html5 as MonoHtml5,
-  Css3Icon as MonoCss3Icon,
-  Javascript as MonoJavascript,
-  TailwindIcon as MonoTailwindIcon,
-  Bootstrap as MonoBootstrap,
-  Framer as MonoFramer,
-  NodejsIcon as MonoNodejsIcon,
-  Express as MonoExpress,
-  MongodbIcon as MonoMongodbIcon,
-  SpringIcon as MonoSpringIcon,
-  Auth0 as MonoAuth0,
-  MysqlIcon as MonoMysqlIcon,
-  Postgresql as MonoPostgresql,
-  Supabase as MonoSupabase,
-  Neon as MonoNeon,
-  Prisma as MonoPrisma,
-  Langchain as MonoLangchain,
-  GitIcon as MonoGitIcon,
-  GithubIcon as MonoGithubIcon,
-  PostmanIcon as MonoPostmanIcon,
-  Aws as MonoAws,
-  MicrosoftAzure as MonoMicrosoftAzure,
-  Cloudflare as MonoCloudflare,
-  Figma as MonoFigma,
-  Docker as MonoDocker,
-  Kubernetes as MonoKubernetes,
-  Jenkins as MonoJenkins,
-  Netlify as MonoNetlify,
-  VercelIcon as MonoVercelIcon,
-  CPlusplus as MonoCPlusplus,
-  Java as MonoJava,
-  Python as MonoPython
-} from '@dev.icons/react/mono';
-
+import * as DevIcons from '@dev.icons/react';
+import * as MonoIcons from '@dev.icons/react/mono';
 import { FaCode } from 'react-icons/fa';
-
-// Map of components for easy key-based lookup
-const DevIconsMap = {
-  NextjsIcon,
-  _React,
-  Html5,
-  Css3Icon,
-  Javascript,
-  TailwindIcon,
-  Bootstrap,
-  Framer,
-  NodejsIcon,
-  Express,
-  MongodbIcon,
-  SpringIcon,
-  Auth0,
-  MysqlIcon,
-  Postgresql,
-  Supabase,
-  Neon,
-  Prisma,
-  Langchain,
-  GitIcon,
-  GithubIcon,
-  PostmanIcon,
-  Aws,
-  MicrosoftAzure,
-  Cloudflare,
-  Figma,
-  Docker,
-  Kubernetes,
-  Jenkins,
-  Netlify,
-  VercelIcon,
-  CPlusplus,
-  Java,
-  Python
-};
-
-const MonoIconsMap = {
-  NextjsIcon: MonoNextjsIcon,
-  _React: Mono_React,
-  Html5: MonoHtml5,
-  Css3Icon: MonoCss3Icon,
-  Javascript: MonoJavascript,
-  TailwindIcon: MonoTailwindIcon,
-  Bootstrap: MonoBootstrap,
-  Framer: MonoFramer,
-  NodejsIcon: MonoNodejsIcon,
-  Express: MonoExpress,
-  MongodbIcon: MonoMongodbIcon,
-  SpringIcon: MonoSpringIcon,
-  Auth0: MonoAuth0,
-  MysqlIcon: MonoMysqlIcon,
-  Postgresql: MonoPostgresql,
-  Supabase: MonoSupabase,
-  Neon: MonoNeon,
-  Prisma: MonoPrisma,
-  Langchain: MonoLangchain,
-  GitIcon: MonoGitIcon,
-  GithubIcon: MonoGithubIcon,
-  PostmanIcon: MonoPostmanIcon,
-  Aws: MonoAws,
-  MicrosoftAzure: MonoMicrosoftAzure,
-  Cloudflare: MonoCloudflare,
-  Figma: MonoFigma,
-  Docker: MonoDocker,
-  Kubernetes: MonoKubernetes,
-  Jenkins: MonoJenkins,
-  Netlify: MonoNetlify,
-  VercelIcon: MonoVercelIcon,
-  CPlusplus: MonoCPlusplus,
-  Java: MonoJava,
-  Python: MonoPython
-};
 
 // Map of legacy react-icons or other database name variants to exact exports
 const nameMap = {
@@ -262,7 +115,7 @@ function findIconComponent(iconName, iconSet) {
  * Falls back to FaCode if not found.
  */
 export function getDeviconComponent(iconName) {
-    return findIconComponent(iconName, DevIconsMap) || FaCode;
+    return findIconComponent(iconName, DevIcons) || FaCode;
 }
 
 /**
@@ -270,5 +123,5 @@ export function getDeviconComponent(iconName) {
  * Falls back to FaCode if not found.
  */
 export function getDeviconMonoComponent(iconName) {
-    return findIconComponent(iconName, MonoIconsMap) || FaCode;
+    return findIconComponent(iconName, MonoIcons) || FaCode;
 }
