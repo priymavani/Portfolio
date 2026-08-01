@@ -66,10 +66,10 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-4">
           <div className="flex items-center gap-4 border-r border-white/10 pr-4">
             {socialLinks?.github && (
-              <a href={socialLinks.github} target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white transition-colors text-2xl"><FaGithub /></a>
+              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" className="text-neutral-400 hover:text-white transition-colors text-2xl"><FaGithub /></a>
             )}
             {socialLinks?.linkedin && (
-              <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white transition-colors text-2xl"><FaLinkedin /></a>
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" className="text-neutral-400 hover:text-white transition-colors text-2xl"><FaLinkedin /></a>
             )}
           </div>
           <button
@@ -83,6 +83,7 @@ const Header = () => {
         <button
           className="md:hidden text-neutral-400 hover:text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile navigation menu"
         >
           {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>

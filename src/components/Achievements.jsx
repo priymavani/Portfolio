@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaAward, FaFingerprint } from 'react-icons/fa';
+import Image from 'next/image';
 import { usePortfolio } from '../contexts/PortfolioContext';
 
 // --- COMPONENT 1: HOLOGRAPHIC ID CARD (Certificates) ---
@@ -54,9 +55,11 @@ const TiltCard = ({ cert }) => {
 
       {/* Visual Header Section */}
       <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 relative overflow-hidden flex-shrink-0">
-        <img
+        <Image
           src={cert.image}
-          alt={cert.title}
+          alt={`Certificate for ${cert.title}`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="w-full h-full object-cover"
         />
       </div>
@@ -141,7 +144,13 @@ const HackathonCase = ({ hackathon }) => (
     <div className="grid lg:grid-cols-2 gap-8 p-8 relative z-10">
       <div className="relative h-64 lg:h-auto flex items-center justify-center perspective-1000 group-hover:perspective-[800px] transition-all duration-500">
         <div className="relative w-full max-w-sm aspect-video transform rotate-x-12 rotate-y-6 rotate-z-2 group-hover:rotate-0 transition-transform duration-700 ease-out shadow-2xl">
-          <img src={hackathon.image} alt={hackathon.title} className="w-full h-full object-cover rounded-lg border border-white/10" />
+          <Image
+            src={hackathon.image}
+            alt={`${hackathon.title} event`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="w-full h-full object-cover rounded-lg border border-white/10"
+          />
           <div className="absolute -bottom-10 left-0 right-0 h-10 bg-gradient-to-t from-accent/20 to-transparent blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
         </div>
       </div>

@@ -118,21 +118,24 @@ export const metadata = {
 // ── JSON-LD Structured Data ──
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Priy Mavani",
-  url: siteUrl,
-  image: `${siteUrl}/profile-cutout.png`,
-  jobTitle: "Full Stack Engineer",
-  description:
-    "Full Stack Engineer specializing in scalable React architectures, secure Node.js environments, and pixel-perfect design systems.",
-  knowsAbout: [
-    "React", "Next.js", "Node.js", "MongoDB", "JavaScript", "TypeScript",
-    "Express.js", "Tailwind CSS", "Full Stack Development", "Web Development",
-  ],
-  sameAs: [
-    "https://github.com/priymavani",
-    "https://linkedin.com/in/priymavani",
-  ],
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Priy Mavani",
+    "url": siteUrl,
+    "image": `${siteUrl}/profile-cutout.png`,
+    "jobTitle": "Full Stack Engineer",
+    "description":
+      "Full Stack Engineer specializing in scalable React architectures, secure Node.js environments, and pixel-perfect design systems.",
+    "knowsAbout": [
+      "React", "Next.js", "Node.js", "MongoDB", "JavaScript", "TypeScript",
+      "Express.js", "Tailwind CSS", "Full Stack Development", "Web Development",
+    ],
+    "sameAs": [
+      "https://github.com/priymavani",
+      "https://linkedin.com/in/priymavani",
+    ],
+  }
 };
 
 export const viewport = {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const EntryPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,9 +66,12 @@ const EntryPopup = () => {
 
             {/* Top - Image Area */}
             <div className="w-full relative bg-[#050505] flex items-center justify-center border-b border-white/5 overflow-hidden group p-2 sm:p-4">
-              <img 
+              <Image 
                 src="https://res.cloudinary.com/dd6lqkak0/image/upload/v1778579317/Eklvya_poster-2_vef7ru.png" 
-                alt="Hackathon Team" 
+                alt="Hackathon Team Poster" 
+                width={800}
+                height={600}
+                priority
                 className="w-full h-auto max-h-[45vh] object-contain opacity-100 group-hover:scale-105 transition-transform duration-700 ease-in-out"
               />
             </div>

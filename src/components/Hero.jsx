@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
-
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const ActivityCalendar = dynamic(
@@ -100,9 +100,12 @@ const Hero = () => {
 
             {/* Image */}
             <div className="relative z-10 w-full h-full flex items-end justify-center">
-              <img
+              <Image
                 src="/profile-cutout.png"
-                alt="Priy Mavani"
+                alt="Priy Mavani - Full Stack Engineer Profile Picture"
+                width={600}
+                height={600}
+                priority
                 className="w-auto h-full max-h-[300px] sm:max-h-[350px] lg:max-h-[600px] object-contain drop-shadow-[0_0_50px_rgba(59,130,246,0.3)]"
               />
             </div>
@@ -169,7 +172,7 @@ const Hero = () => {
                       <motion.circle
                         cx="50" cy="50" r="45"
                         fill="none" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round"
-                        initial={{ strokeDasharray: "282.7", strokeDashoffset: "282.7" }}
+                        initial={{ strokeDasharray: 282.7, strokeDashoffset: 282.7 }}
                         animate={{ strokeDashoffset: 282.7 - (282.7 * Math.min(stats.leetcode.total / 500, 1)) }}
                         transition={{ duration: 1.5, ease: "easeOut" }}
                       />
@@ -303,7 +306,7 @@ const Hero = () => {
                         <motion.circle
                           cx="50" cy="50" r="45"
                           fill="none" stroke="#3B82F6" strokeWidth="8" strokeLinecap="round"
-                          initial={{ strokeDasharray: "282.7", strokeDashoffset: "282.7" }}
+                          initial={{ strokeDasharray: 282.7, strokeDashoffset: 282.7 }}
                           animate={{ strokeDashoffset: 282.7 - (282.7 * Math.min(stats.leetcode.total / 500, 1)) }}
                           transition={{ duration: 1.5, ease: "easeOut" }}
                         />

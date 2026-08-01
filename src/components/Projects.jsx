@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { FaGithub, FaGlobe, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import { SiFigma, SiPostman } from 'react-icons/si';
+import Image from 'next/image';
 import VideoPlayer from './ui/VideoPlayer'; // Standard import - VideoPlayer handles dynamic loading internally
 
 // --- FILTER BAR ---
@@ -83,7 +84,13 @@ const BrowserWindow = ({ image, title }) => (
       </div>
       <div className="relative aspect-video overflow-hidden">
         {image && (
-          <img src={image} alt={title} className="w-full h-full object-fill transition-transform duration-700 group-hover:scale-105" />
+          <Image
+            src={image}
+            alt={`${title} project preview`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="w-full h-full object-fill transition-transform duration-700 group-hover:scale-105"
+          />
         )}
         <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
       </div>
@@ -373,9 +380,11 @@ const Projects = () => {
                         <VideoPlayer url={project.video} isMuted={true} />
                       </div>
                     ) : project.image ? (
-                      <img
+                      <Image
                         src={project.image}
-                        alt={project.title}
+                        alt={`${project.title} project thumbnail`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
